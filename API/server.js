@@ -4,6 +4,7 @@ import cors from "cors";
 import errorHandler from "./src/middlewares/errorhandler.mid.js";
 import pathHandler from "./src/middlewares/pathHandler.mid.js";
 import __dirname from "./utils.js";
+import apiRouter from "./src/routes/index.router.js";
 
 const server = express();
 const PORT = process.env.PORT || 8080;
@@ -18,14 +19,8 @@ server.use(
   })
 );
 
-server.get("/", (req, res, next) => {
-  try {
-    return res.send("hola mundo");
-  } catch (error) {
-    next(error);
-  }
-});
 
+server.use("/api", apiRouter)
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(errorHandler);
