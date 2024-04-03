@@ -1,30 +1,27 @@
-// user.model.js
+import { model, Schema } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
-import mongoose from 'mongoose';
+const collection = "users";
 
-const { Schema } = mongoose;
-
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true
+const schema = new Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true, index: true },
+    password: { type: String, required: true },
+    role: { type: Number, required: true, default: 0, enum: [0, 1, 2] },
+    photo: {
+      type: String,
+      default:
+        "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg",
+    },
+    verified: { type: Boolean, required: true, default: false },
+    verifyCode: { type: String, required: true },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+  { timestamps: true }
+);
 
-const User = mongoose.model('User', userSchema);
+schema.plugin(mongoosePaginate)
+
+const User = model(collection, Schema);
 
 export default User;
