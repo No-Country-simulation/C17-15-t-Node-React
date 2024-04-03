@@ -23,6 +23,8 @@ server.use(
 server.use("/api", apiRouter)
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
+
+route(server);
 server.use(errorHandler);
 server.use(pathHandler);
 server.use(express.static(__dirname + "/public"))
