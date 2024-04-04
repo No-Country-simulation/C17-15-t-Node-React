@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 8080;
 const ready = () => {
   console.log(`server ready on port ${PORT}`),
   dbConnection()
+  console.log("db connected")
 }
 
 server.listen(PORT, ready)
