@@ -1,5 +1,4 @@
 import Admin from "./model/admin.model.js";
-import Student from "./model/student.model.js";
 
 class MongoManager {
   constructor(model) {
@@ -55,5 +54,4 @@ class MongoManager {
 }
 
 export const admin = new MongoManager(Admin);
-export const student = new MongoManager(Student);
 

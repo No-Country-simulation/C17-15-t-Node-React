@@ -1,72 +1,65 @@
-import { student } from "../data/mongoManager.js";
+import { Student } from "../data/model/index.js";
 
-class StudentController {
-  constructor() {
-    this.controller = student 
+// Obtener todos los estudiantes
+export const getAllStudents = async (req, res) => {
+  try {
+    const students = await Student.find();
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
+};
 
-  create = async ( req, res, next ) => {
-    try {
-      const data = req.body
-      const response = await this.controller.create(data)
-      return res.json({
-        statusCode: 201,
-        response
-      })
-    } catch (error) {
-      return next(error)
+// Obtener un estudiante por su id
+export const getStudentById = async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.id);
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
     }
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-  read = async(req, res, next) => {
-    try {
-      const response = await this.controller.read()
-      return res.json({
-        statusCode: 200,
-        response
-      })
-    } catch (error) {
-      next(error)
-    }
-  }
-  readOne = async(req, res, next) => {
-    try {
-      const { aid } = req.params
-      const response = await this.controller.readOne(aid)
-      return res.json({
-        statusCode:200,
-        response
-      })
-    } catch (error) {
-      next(error)
-    }
-  }
-  destroy = async(req, res, next) => {
-    try {
-      const { aid } = req.params
-      const response = await this.controller.delete(aid)
-      return res.json({
-        statusCode: 200,
-        response
-      })
-    } catch (error) {
-      next(error)
-    }
-  }
-  update = async(req, res, next) => {
-    try {
-      const { aid } = req.params
-      const data = req.body
-      const opts = { new: true }
-      const response = await this.controller.update(aid, data, opts)
-      return res.json({
-        statusCode: 200,
-        response
-      })
-    } catch (error) {
-      next(error)
-    }
-  }
-}
+};
 
-const controller = new StudentController(student)
-export const { create, read, readOne, destroy, update } = controller
+// Crear un nuevo estudiante
+export const createStudent = async (req, res) => {
+  try {
+    const newStudent = new Student(req.body);
+    const savedStudent = await newStudent.save();
+    res.status(201).json(savedStudent);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// Editar un estudiante
+export const updateStudent = async (req, res) => {
+  try {
+    const updatedStudent = await Student.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!updatedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+    res.status(200).json(updatedStudent);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Borrar un estudiante
+export const deleteStudent = async (req, res) => {
+  try {
+    const deletedStudent = await Student.findByIdAndDelete(req.params.id);
+    if (!deletedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+    res.status(200).json({ message: "Student deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
