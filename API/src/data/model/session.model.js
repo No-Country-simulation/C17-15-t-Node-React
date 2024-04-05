@@ -14,7 +14,7 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-sessionSchema.plugin(mongoosePaginate);
+schema.plugin(mongoosePaginate);
 
 const Session = model(collection, schema);
 

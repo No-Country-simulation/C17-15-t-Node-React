@@ -1,35 +1,72 @@
-import { Session } from "../data/model/index.js";
+import { session } from "../data/mongoManager.js";
 
-// Obtener todas las sesiones
-export const getAllSessions = async (req, res) => {
-  try {
-    const sessions = await Session.find();
-    res.status(200).json(sessions);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+class SessionController {
+  constructor() {
+    this.controller = session;
   }
-};
 
-// Crear una nueva sesión
-export const createSession = async (req, res) => {
-  try {
-    const newSession = new Session(req.body);
-    const savedSession = await newSession.save();
-    res.status(201).json(savedSession);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-// Obtener una sesión específica por ID
-export const getSessionById = async (req, res) => {
-  try {
-    const session = await Session.findById(req.params.id);
-    if (!session) {
-      return res.status(404).json({ message: "Session not found" });
+  create = async (req, res, next) => {
+    try {
+      const data = req.body;
+      const response = await this.controller.create(data);
+      return res.json({
+        statusCode: 201,
+        response,
+      });
+    } catch (error) {
+      return next(error);
     }
-    res.status(200).json(session);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+  };
+  read = async (req, res, next) => {
+    try {
+      const response = await this.controller.read();
+      return res.json({
+        statusCode: 200,
+        response,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+  readOne = async (req, res, next) => {
+    try {
+      const { aid } = req.params;
+      const response = await this.controller.readOne(aid);
+      return res.json({
+        statusCode: 200,
+        response,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+  destroy = async (req, res, next) => {
+    try {
+      const { aid } = req.params;
+      const response = await this.controller.delete(aid);
+      return res.json({
+        statusCode: 200,
+        response,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+  update = async (req, res, next) => {
+    try {
+      const { aid } = req.params;
+      const data = req.body;
+      const opts = { new: true };
+      const response = await this.controller.update(aid, data, opts);
+      return res.json({
+        statusCode: 200,
+        response,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+}
+
+const controller = new SessionController(session);
+export const { create, read, readOne, destroy, update } = controller;

@@ -27,7 +27,7 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-tutorSchema.plugin(mongoosePaginate);
+schema.plugin(mongoosePaginate);
 
 const Tutor = model(collection, schema);
 

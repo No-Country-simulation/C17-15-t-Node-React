@@ -13,7 +13,7 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-ratingSchema.plugin(mongoosePaginate);
+schema.plugin(mongoosePaginate);
 
 const Rating = model(collection, schema);
 
