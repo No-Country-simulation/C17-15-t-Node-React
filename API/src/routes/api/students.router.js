@@ -1,6 +1,13 @@
 import { Router } from "express";
+import { create, read, readOne, update, destroy } from "../../controllers/studentController.js";
 
-const studentsRouter = Router()
+const studentsRouter = Router();
 
-export default studentsRouter
+studentsRouter.post("/", create);
+studentsRouter.get("/", read)
+studentsRouter.get("/:aid", readOne)
+studentsRouter.put("/:aid", update)
+studentsRouter.delete("/:aid", destroy)
+
+export default studentsRouter;
 
