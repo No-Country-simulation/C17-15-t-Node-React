@@ -1,5 +1,7 @@
 import Admin from "./model/admin.model.js";
 import Student from "./model/student.model.js";
+import Tutor from "./model/tutor.model.js";
+import Rating from "./model/rating.model.js";
 
 class MongoManager {
   constructor(model) {
@@ -16,44 +18,45 @@ class MongoManager {
   }
   async read() {
     try {
-      const one = await this.model.find({})
-      return one
+      const one = await this.model.find({});
+      return one;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
   async readOne(id) {
     try {
-      const one = await this.model.findById(id)
-      if(!one) {
-        const error = new Error('admin not found')
-        error.statusCode = 404
-        throw error
+      const one = await this.model.findById(id);
+      if (!one) {
+        const error = new Error("admin not found");
+        error.statusCode = 404;
+        throw error;
       }
-      return one
+      return one;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
   async update(id, data) {
     try {
-      const opts = { new: true }
-      const one = await this.model.findByIdAndUpdate(id, data, opts)
-      return one
+      const opts = { new: true };
+      const one = await this.model.findByIdAndUpdate(id, data, opts);
+      return one;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
   async delete(id) {
     try {
-      const one = await this.model.findByIdAndDelete(id)
-      return one
+      const one = await this.model.findByIdAndDelete(id);
+      return one;
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 }
 
 export const admin = new MongoManager(Admin);
 export const student = new MongoManager(Student);
-
+export const tutor = new MongoManager(Tutor);
+export const rating = new MongoManager(Rating);
