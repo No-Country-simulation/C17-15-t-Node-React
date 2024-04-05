@@ -10,7 +10,7 @@ export const getAllSubjects = async (req, res) => {
   }
 };
 // Obtener una asignatura específica por ID
-export const getSubjectById = async (req, res) => {
+export const getSubjectById = async (req, res, next) => {
   try {
     const subject = await Subject.findById(req.params.id);
     if (!subject) {
@@ -18,7 +18,7 @@ export const getSubjectById = async (req, res) => {
     }
     res.status(200).json(subject);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error)
   }
 };
 

@@ -1,7 +1,9 @@
 import { Schema, model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const tutorSchema = new Schema(
+const collection = "Tutor"
+
+const schema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, index: true },
@@ -27,6 +29,6 @@ const tutorSchema = new Schema(
 
 tutorSchema.plugin(mongoosePaginate);
 
-const Tutor = model("Tutor", tutorSchema);
+const Tutor = model(collection, schema);
 
 export default Tutor;

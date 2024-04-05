@@ -24,8 +24,8 @@ server.use(
   })
 );
 
-server.use("/api", apiRouter)
 server.use(express.json());
+server.use("/api", apiRouter)
 server.use(express.urlencoded({ extended: true }));
 server.use(errorHandler);
 server.use(pathHandler);

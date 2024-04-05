@@ -1,7 +1,9 @@
 import { Schema, model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const subjectSchema = new Schema(
+const collection = "Subject"
+
+const schema = new Schema(
   {
     name: String,
     description: String,
@@ -11,6 +13,6 @@ const subjectSchema = new Schema(
 
 subjectSchema.plugin(mongoosePaginate);
 
-const Subject = model("Subject", subjectSchema);
+const Subject = model(collection, schema);
 
 export default Subject;

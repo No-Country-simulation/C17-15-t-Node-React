@@ -1,17 +1,19 @@
 import { Schema, model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const adminSchema = new Schema(
+  const collection = "Admin"
+
+const schema = new Schema(
   {
-    name: String,
-    email: String,
-    hashed_password: String,
+    name: { type: String, required: true},
+    email: { type: String, required: true},
+    password: { type: String, required: true},
   },
   { timestamps: true }
 );
 
-adminSchema.plugin(mongoosePaginate);
+schema.plugin(mongoosePaginate);
 
-const Admin = model("Admin", adminSchema);
+const Admin = model(collection, schema);
 
 export default Admin;

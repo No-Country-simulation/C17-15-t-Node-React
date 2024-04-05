@@ -1,61 +1,73 @@
-import { Admin } from "../data/model/index.js";
+import { admin } from "../data/mongoManager.js";
 
-// Obtener todos los administradores
-export const getAllAdmins = async (req, res) => {
-  try {
-    const admins = await Admin.find();
-    res.status(200).json(admins);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+class AdminController {
+  constructor() {
+    this.controller = admin
   }
-};
-// Obtener un administrador específico por ID
-export const getAdminById = async (req, res) => {
-  try {
-    const admin = await Admin.findById(req.params.id);
-    if (!admin) {
-      return res.status(404).json({ message: "Admin not found" });
+
+  create = async ( req, res, next ) => {
+    try {
+      const data = req.body
+      const response = await this.controller.create(data)
+      return res.json({
+        statusCode: 201,
+        response
+      })
+    } catch (error) {
+      return next(error)
     }
-    res.status(200).json(admin);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
-};
-// Crear un nuevo administrador
-export const createAdmin = async (req, res) => {
-  try {
-    const newAdmin = new Admin(req.body);
-    const savedAdmin = await newAdmin.save();
-    res.status(201).json(savedAdmin);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-// Editar un administrador
-export const updateAdmin = async (req, res) => {
-  try {
-    const updatedAdmin = await Admin.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    if (!updatedAdmin) {
-      return res.status(404).json({ message: "Admin not found" });
+  read = async(req, res, next) => {
+    try {
+      const response = await this.controller.read()
+      return res.json({
+        statusCode: 200,
+        response
+      })
+    } catch (error) {
+      next(error)
     }
-    res.status(200).json(updatedAdmin);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
-};
-// Borrar un administrador
-export const deleteAdmin = async (req, res) => {
-  try {
-    const deletedAdmin = await Admin.findByIdAndDelete(req.params.id);
-    if (!deletedAdmin) {
-      return res.status(404).json({ message: "Admin not found" });
+  readOne = async(req, res, next) => {
+    try {
+      const { aid } = req.params
+      const response = await this.controller.readOne(aid)
+      return res.json({
+        statusCode:200,
+        response
+      })
+    } catch (error) {
+      next(error)
     }
-    res.status(200).json({ message: "Admin deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
-};
+  destroy = async(req, res, next) => {
+    try {
+      const { aid } = req.params
+      const response = await this.controller.delete(aid)
+      return res.json({
+        statusCode: 200,
+        response
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+  update = async(req, res, next) => {
+    try {
+      const { aid } = req.params
+      const data = req.body
+      const opts = { new: true }
+      const response = await this.controller.update(aid, data, opts)
+      return res.json({
+        statusCode: 200,
+        response
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+}
+
+const controller = new AdminController(admin)
+export const { create, read, readOne, destroy, update } = controller
+

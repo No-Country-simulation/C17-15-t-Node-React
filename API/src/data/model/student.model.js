@@ -1,7 +1,9 @@
 import { Schema, model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const studentSchema = new Schema(
+const collection = "Student"
+
+const schema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, index: true },
@@ -26,6 +28,6 @@ const studentSchema = new Schema(
 
 studentSchema.plugin(mongoosePaginate);
 
-const Student = model("Student", studentSchema);
+const Student = model(collection, schema);
 
 export default Student;
