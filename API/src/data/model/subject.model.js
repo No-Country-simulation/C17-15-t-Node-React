@@ -5,13 +5,13 @@ const collection = "Subject"
 
 const schema = new Schema(
   {
-    name: String,
-    description: String,
+    name: { type: String, required: true },
+    description: { type: String, required: true },
   },
   { timestamps: true }
 );
 
-subjectSchema.plugin(mongoosePaginate);
+schema.plugin(mongoosePaginate);
 
 const Subject = model(collection, schema);
 

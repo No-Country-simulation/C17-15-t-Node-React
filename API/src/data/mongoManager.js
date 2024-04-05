@@ -1,5 +1,6 @@
 import Admin from "./model/admin.model.js";
 import Student from "./model/student.model.js";
+import Subject from "./model/subject.model.js";
 
 class MongoManager {
   constructor(model) {
@@ -26,7 +27,7 @@ class MongoManager {
     try {
       const one = await this.model.findById(id)
       if(!one) {
-        const error = new Error('admin not found')
+        const error = new Error('document not found')
         error.statusCode = 404
         throw error
       }
@@ -56,4 +57,4 @@ class MongoManager {
 
 export const admin = new MongoManager(Admin);
 export const student = new MongoManager(Student);
-
+export const subject = new MongoManager(Subject);
