@@ -26,7 +26,7 @@ const schema = new Schema(
   { timestamps: true }
 );
 
-studentSchema.plugin(mongoosePaginate);
+schema.plugin(mongoosePaginate);
 
 const Student = model(collection, schema);
 
