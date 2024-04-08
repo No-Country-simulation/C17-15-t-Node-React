@@ -22,20 +22,23 @@ export function Footer() {
     //relative--- en el footer antes de w- md:w-auto
     <footer className="w- md:w-auto">
       <div className="mx-auto w-full px-8 bg-gradient-to-br from-primary to-secondary">
-        <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2 border-2 border-red-500 pt-12">
+        <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2 pt-12">
           <div>
-            <Typography variant="h5" color="white" className="mb-6">
+            <Typography variant="h5" color="white" className="mb-16">
               WebApp Tutorias/Cursos
             </Typography>
+            <Typography color="white" className="mb-6">
+              Siguenos en nuestras redes.
+            </Typography>
             <div>
-              <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
+              <div className="flex gap-7 text-blue-gray-900">
                 <Typography
                   as="a"
                   href="#"
-                  className="opacity-80 transition-opacity hover:opacity-100"
+                  className="opacity-80 transition-opacity hover:opacity-100 text-white"
                 >
                   <svg
-                    className="h-5 w-5"
+                    className="h-5 w-5 scale-x-150 scale-y-150"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -50,10 +53,10 @@ export function Footer() {
                 <Typography
                   as="a"
                   href="#"
-                  className="opacity-80 transition-opacity hover:opacity-100"
+                  className="opacity-80 transition-opacity hover:opacity-100 text-white"
                 >
                   <svg
-                    className="h-5 w-5"
+                    className="h-5 w-5 scale-x-150 scale-y-150"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -68,10 +71,10 @@ export function Footer() {
                 <Typography
                   as="a"
                   href="#"
-                  className="opacity-80 transition-opacity hover:opacity-100"
+                  className="opacity-80 transition-opacity hover:opacity-100 text-white"
                 >
                   <svg
-                    className="h-5 w-5"
+                    className="h-5 w-5 scale-x-150 scale-y-150"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
