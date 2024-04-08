@@ -19,9 +19,9 @@ const currentYear = new Date().getFullYear();
  
 export function Footer() {
   return (
-    <footer className="relative w-full">
-      <div className="mx-auto w-full max-w-7xl px-8 bg-gradient-to-br from-primary to-secondary">
-        <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
+    <footer className="relative w- md:w-auto">
+      <div className="mx-auto w-full px-8 bg-gradient-to-br from-primary to-secondary">
+        <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2 border-2 border-red-500">
           <Typography variant="h5" className="mb-6">
             WebApp Tutorias/Cursos
           </Typography>
