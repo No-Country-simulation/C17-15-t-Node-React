@@ -11,7 +11,14 @@ module.exports = withMT({
     extend: {
       colors: {
         "primary": "#B671FF",
-        "secondary": "#E985C1"
+        "secondary": "#E985C1",
+        "third": "#193e5a",
+        "four": "#29bcc7",
+        "amarillo": "#fcdc59",
+        "dorado": "#efb810",
+        "azul1": "#43CEDE",
+        "azul2": "#436CDE",
+        "azul3": "#4A43DE"
       }
     },
   },
