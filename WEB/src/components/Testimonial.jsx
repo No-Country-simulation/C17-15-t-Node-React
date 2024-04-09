@@ -25,18 +25,18 @@ function StarIcon() {
 
 export function Testimonial() {
   return (
-    <div className="flex flex-col p-8 m-auto gap-6 items-center justify-center">
+    <div className="flex flex-col p-8 m-auto gap-6 items-center justify-center ">
       <div className="flex flex-col items-center justify-center">
-        <div className="text-5xl font-extrabold mb-8">
-          <span className="bg-clip-text text-transparent bg-gradient-to-br from-primary to-secondary">Testimonios que inspiran</span>
+        <div className="text-5xl font-extrabold mb-8 cellphone:text-4xl cellphone:flex">
+          <span className="bg-clip-text text-transparent bg-gradient-to-br from-primary to-secondary cellphone:text-center">Testimonios que inspiran</span>
         </div>
-        <Typography className="mb-5">
+        <Typography className="mb-5 cellphone:text-center">
           Descubre lo que dicen nuestros estudiantes sobre sus experiencias con
-          TutoriasApp
+          MasterAula
         </Typography>
       </div>
 
-      <div className="flex m-auto gap-6 items-center justify-center">
+      <div className="flex m-auto gap-6 items-center justify-center cellphone:flex-col">
         <Card
           color="transparent"
           shadow={false}
