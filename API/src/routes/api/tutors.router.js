@@ -1,7 +1,13 @@
 import { Router } from "express";
+import { create, read, readOne, update, destroy } from "../../controllers/tutorController.js";
 
-const tutorsRouter = Router()
+const tutorsRouter = Router();
 
-export default tutorsRouter
+tutorsRouter.post("/", create);
+tutorsRouter.get("/", read)
+tutorsRouter.get("/:aid", readOne)
+tutorsRouter.put("/:aid", update)
+tutorsRouter.delete("/:aid", destroy)
 
+export default tutorsRouter;
 
