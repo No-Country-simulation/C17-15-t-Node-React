@@ -29,5 +29,4 @@ server.use("/api", apiRouter)
 server.use(express.urlencoded({ extended: true }));
 server.use(errorHandler);
 server.use(pathHandler);
-server.use(express.static(__dirname + "/public"))
-
+server.use(express.static(__dirname + "/public"));
