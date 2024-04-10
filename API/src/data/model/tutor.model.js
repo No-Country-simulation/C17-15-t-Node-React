@@ -1,14 +1,17 @@
-import { model, Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const collection = "users";
+const collection = "Tutor"
 
 const schema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, index: true },
     password: { type: String, required: true },
-    role: { type: Number, required: true, default: 0, enum: [0, 1, 2] },
+    specialties: [String],
+    biography: String,
+    average_rating: Number,
+    given_sessions: [{ type: Schema.Types.ObjectId, ref: "Session" }],
     photo: {
       type: String,
       default:
@@ -16,12 +19,16 @@ const schema = new Schema(
     },
     verified: { type: Boolean, required: true, default: false },
     verifyCode: { type: String, required: true },
+    city: { type: String, required: true },
+    country: { type: String, required: true },
+    language: { type: String, required: true },
+    timezone: { type: String, required: true },
   },
   { timestamps: true }
 );
 
-schema.plugin(mongoosePaginate)
+schema.plugin(mongoosePaginate);
 
-const User = model(collection, Schema);
+const Tutor = model(collection, schema);
 
-export default User;
+export default Tutor;
