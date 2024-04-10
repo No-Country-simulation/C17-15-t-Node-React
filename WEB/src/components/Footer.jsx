@@ -24,10 +24,10 @@ export function Footer() {
       <div className="mx-auto w-full px-8 bg-gradient-to-br from-primary to-secondary">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2 pt-12">
           <div>
-            <Typography variant="h5" color="white" className="mb-16">
-              WebApp Tutorias/Cursos
+            <Typography variant="h5" color="white" className="mb-16 cellphone:text-center cellphone:mb-8">
+              MasterAula
             </Typography>
-            <Typography color="white" className="mb-6">
+            <Typography color="white" className="mb-6 cellphone:mb-2">
               Siguenos en nuestras redes.
             </Typography>
             <div>

@@ -21,7 +21,11 @@ module.exports = withMT({
         "azul3": "#4A43DE"
       },
       screens: {
-        "cellphone": "360px"
+        "cellphone": "360px",
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px"
       }
     },
   },
