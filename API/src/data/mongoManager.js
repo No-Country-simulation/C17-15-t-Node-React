@@ -4,6 +4,8 @@ import Tutor from "./model/tutor.model.js";
 import Rating from "./model/rating.model.js";
 import Subject from "./model/subject.model.js";
 import Session from "./model/session.model.js";
+import Course from "./model/course.model.js";
+import CourseRating from "./model/courseRating.model.js"; // Added import for CourseRating
 
 class MongoManager {
   constructor(model) {
@@ -64,3 +66,5 @@ export const tutor = new MongoManager(Tutor);
 export const rating = new MongoManager(Rating);
 export const subject = new MongoManager(Subject);
 export const session = new MongoManager(Session);
+export const course = new MongoManager(Course);
+export const courseRating = new MongoManager(CourseRating);

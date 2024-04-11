@@ -1,9 +1,7 @@
-import MongoManager from "../data/mongoManager.js";
-import Course from "../data/model/course.model.js";
-
+import { course } from "../data/mongoManager.js";
 class CourseController {
   constructor() {
-    this.controller = new MongoManager(Course);
+    this.controller = course;
   }
 
   create = async (req, res, next) => {
@@ -214,5 +212,16 @@ class CourseController {
   };
 }
 
-const courseController = new CourseController();
-export default courseController;
+const controller = new CourseController(course);
+export const {
+  create,
+  read,
+  readOne,
+  destroy,
+  update,
+  addContent,
+  readContents,
+  readOneContent,
+  updateContent,
+  deleteContent,
+} = controller;
