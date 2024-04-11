@@ -1,0 +1,42 @@
+.profesorDestacado {
+  width: 90%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+.header {
+  text-align: center;
+}
+.content {
+  display: flex;
+}
+img {
+  flex: 1;
+  min-width: 400px;
+}
+.info {
+  min-width: 400px;
+  flex: 1;
+  padding: 15px;
+}
+.icon {
+  background-color: aliceblue;
+  color: black;
+  border-radius: 6px;
+  font-size: 30px;
+}
+.whatsapp,
+.tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.tool div {
+  flex: 1;
+  max-width: 80px;
+}
+h4,
+p {
+  margin: 15px 0;
+}
