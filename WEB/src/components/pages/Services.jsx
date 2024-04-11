@@ -3,7 +3,7 @@ import React from "react";
 export const Services = () => {
   return (
     <>
-      <h1>Services</h1>
+      {/* <h1>Services</h1>
       <div>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem sunt
         itaque, perferendis necessitatibus corrupti ea magni voluptatibus est
@@ -102,7 +102,7 @@ export const Services = () => {
         qui ullam molestias omnis cupiditate dolores sunt incidunt ab nisi eaque
         culpa dolorum? Provident eos doloribus soluta maxime obcaecati quam, a,
         quod blanditiis dolores odit aliquid quis distinctio.
-      </div>
+      </div> */}
     </>
   );
 };
