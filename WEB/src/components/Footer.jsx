@@ -85,7 +85,7 @@ export function Footer() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 justify-between gap-9">
+          <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-3 md:justify-between md:gap-9 pt-12">
             {LINKS.map(({ title, items }) => (
               <ul key={title}>
                 <Typography

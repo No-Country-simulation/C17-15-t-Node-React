@@ -71,7 +71,7 @@ nav .menu span {
     }
 
     .navbar-ul {
-        display: none;
+        /* display: none; */
         flex-direction: column;
         width: 100%;
         margin-bottom: 0.25rem;
