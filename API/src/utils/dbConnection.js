@@ -8,8 +8,7 @@ const dbURI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0.zjtkxvt.mo
 
 // Conectar a la base de datos
 const dbConnection = async () => {
-    mongoose.connect(dbURI);
+  mongoose.connect(dbURI);
 };
 
 export default dbConnection;
-
