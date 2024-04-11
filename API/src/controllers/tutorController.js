@@ -1,9 +1,8 @@
-import MongoManager from "../data/mongoManager.js";
-import Tutor from "../data/model/tutor.model.js";
+import { tutor } from "../data/mongoManager.js";
 
 class TutorController {
   constructor() {
-    this.controller = new MongoManager(Tutor);
+    this.controller = tutor;
   }
 
   create = async (req, res, next) => {
@@ -75,7 +74,7 @@ class TutorController {
     }
   };
 
-  delete = async (req, res, next) => {
+  destroy = async (req, res, next) => {
     try {
       const { id } = req.params;
       const response = await this.controller.delete(id);
@@ -96,5 +95,5 @@ class TutorController {
   };
 }
 
-const tutorController = new TutorController();
-export default tutorController;
+const controller = new TutorController(tutor);
+export const { create, read, readOne, destroy, update } = controller;

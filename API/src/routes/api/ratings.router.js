@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { create, read, readOne, update, destroy } from "../../controllers/raitingController.js";
+import { create, read, readOne, update, destroy  } from "../../controllers/ratingController.js";
 
 const raitingsRouter = Router();
 
