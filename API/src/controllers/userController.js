@@ -66,7 +66,20 @@ class UserController {
       next(error);
     }
   };
+  readByRole = async (req, res, next) => {
+    try {
+      const { role } = req.params;
+      const response = await this.controller.read({ role: role });
+      return res.json({
+        statusCode: 200,
+        response,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 const controller = new UserController(users);
-export const { create, read, readOne, destroy, update } = controller;
+export const { create, read, readOne, destroy, update, readByRole } =
+  controller;
