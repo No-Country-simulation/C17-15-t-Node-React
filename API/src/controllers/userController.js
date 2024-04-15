@@ -1,8 +1,8 @@
-import { admin } from "../data/mongoManager.js";
+import users from "../data/model/user.model.js";
 
-class AdminController {
+class UserController {
   constructor() {
-    this.controller = admin;
+    this.controller = users;
   }
 
   create = async (req, res, next) => {
@@ -66,7 +66,20 @@ class AdminController {
       next(error);
     }
   };
+  readByRole = async (req, res, next) => {
+    try {
+      const { role } = req.params;
+      const response = await this.controller.read({ role: role });
+      return res.json({
+        statusCode: 200,
+        response,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
-const controller = new AdminController(admin);
-export const { create, read, readOne, destroy, update } = controller;
+const controller = new UserController(users);
+export const { create, read, readOne, destroy, update, readByRole } =
+  controller;

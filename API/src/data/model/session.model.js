@@ -1,12 +1,12 @@
 import { Schema, model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const collection = "Session"
+const collection = "Session";
 
 const schema = new Schema(
   {
-    tutor: { type: Schema.Types.ObjectId, ref: "Tutor" },
-    student: { type: Schema.Types.ObjectId, ref: "Student" },
+    tutor: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    student: { type: Schema.Types.ObjectId, ref: "User", required: true },
     subject: { type: Schema.Types.ObjectId, ref: "Subject" },
     date_time: Date,
     status: String,

@@ -1,9 +1,9 @@
-import Admin from "./model/admin.model.js";
-import Student from "./model/student.model.js";
-import Tutor from "./model/tutor.model.js";
 import Rating from "./model/rating.model.js";
 import Subject from "./model/subject.model.js";
 import Session from "./model/session.model.js";
+import User from "./model/user.model.js";
+import Course from "./model/course.model.js";
+import CourseRating from "./model/courseRating.model.js"; // Added import for CourseRating
 
 class MongoManager {
   constructor(model) {
@@ -18,10 +18,10 @@ class MongoManager {
       throw error;
     }
   }
-  async read() {
+  async read(query = {}) {
     try {
-      const one = await this.model.find({});
-      return one;
+      const results = await this.model.find(query);
+      return results;
     } catch (error) {
       throw error;
     }
@@ -39,6 +39,16 @@ class MongoManager {
       throw error;
     }
   }
+
+  async readByEmail(email) {
+    try {
+      const one = await this.model.findOne({ email: email });
+      return one;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async update(id, data) {
     try {
       const opts = { new: true };
@@ -58,9 +68,9 @@ class MongoManager {
   }
 }
 
-export const admin = new MongoManager(Admin);
-export const student = new MongoManager(Student);
-export const tutor = new MongoManager(Tutor);
 export const rating = new MongoManager(Rating);
 export const subject = new MongoManager(Subject);
 export const session = new MongoManager(Session);
+export const users = new MongoManager(User);
+export const course = new MongoManager(Course);
+export const courseRating = new MongoManager(CourseRating);

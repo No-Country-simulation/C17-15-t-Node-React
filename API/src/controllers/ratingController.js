@@ -1,9 +1,8 @@
-import MongoManager from "../data/mongoManager.js";
-import Rating from "../data/model/rating.model.js";
+import { rating } from "../data/mongoManager.js";
 
 class RatingController {
   constructor() {
-    this.controller = new MongoManager(Rating);
+    this.controller = rating;
   }
 
   create = async (req, res, next) => {
@@ -63,7 +62,7 @@ class RatingController {
     }
   };
 
-  delete = async (req, res, next) => {
+  destroy = async (req, res, next) => {
     try {
       const { id } = req.params;
       const response = await this.controller.delete(id);
@@ -81,5 +80,5 @@ class RatingController {
   };
 }
 
-const ratingController = new RatingController();
-export default ratingController;
+const controller = new RatingController(rating);
+export const { create, read, readOne, destroy, update } = controller;
