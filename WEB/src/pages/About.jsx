@@ -1,5 +1,6 @@
 import React from "react";
 
 export const About = () => {
-  return (<></>);
+  return (<>
+  <h1>Hola mundo desde about</h1></>);
 };

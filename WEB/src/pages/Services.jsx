@@ -1,8 +1,8 @@
-import React from "react";
 
 export const Services = () => {
   return (
     <>
+      <h1>Hola mundo Services</h1>
       {/* <h1>Services</h1>
       <div>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem sunt
