@@ -3,11 +3,11 @@ import { Typography } from "@material-tailwind/react";
 const LINKS = [
   {
     title: "Acerca de",
-    items: ["Tutores", "Alumnos", "Pagos", "Peguntas Frecuentes"],
+    items: ["Cursos", "Tutores", "Alumnos", "Pagos"],
   },
   {
     title: "Comunidad",
-    items: ["Eventos", "Blog", "Podcast"],
+    items: ["Eventos", "Blog", "Podcast", "Peguntas Frecuentes"],
   },
   {
     title: "Sociales",
@@ -24,10 +24,10 @@ export function Footer() {
       <div className="mx-auto w-full px-8 bg-gradient-to-br from-primary to-secondary">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2 pt-12">
           <div>
-            <Typography variant="h5" color="white" className="mb-16 cellphone:text-center cellphone:mb-8">
+            <Typography variant="h2" color="white" className="mb-16">
               MasterAula
             </Typography>
-            <Typography color="white" className="mb-6 cellphone:mb-2">
+            <Typography color="white" className="mb-6">
               Siguenos en nuestras redes.
             </Typography>
             <div>
