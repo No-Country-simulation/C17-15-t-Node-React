@@ -78,8 +78,30 @@ class UserController {
       next(error);
     }
   };
+
+  updateAverageRating = async (userId) => {
+    try {
+      const ratings = await this.controller.read({ tutor: userId });
+      if (ratings.length === 0) {
+        console.log("No ratings found for this tutor");
+        return;
+      }
+      const avgRating =
+        ratings.reduce((acc, curr) => acc + curr.score, 0) / ratings.length;
+      await this.controller.update(userId, { average_rating: avgRating });
+    } catch (error) {
+      console.error("Error updating average rating: " + error.message);
+    }
+  };
 }
 
 const controller = new UserController(users);
-export const { create, read, readOne, destroy, update, readByRole } =
-  controller;
+export const {
+  create,
+  read,
+  readOne,
+  destroy,
+  update,
+  readByRole,
+  updateAverageRating,
+} = controller;

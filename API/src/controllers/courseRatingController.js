@@ -1,5 +1,5 @@
 import { courseRating } from "../data/mongoManager.js";
-import { CourseController } from "./courseController.js"; // Asegúrate de que la ruta sea correcta
+import { updateAverageRating } from "./userController.js"; // Asegrate de que la ruta sea correcta
 
 class CourseRatingController {
   constructor() {
@@ -12,7 +12,7 @@ class CourseRatingController {
       const data = req.body; // Datos de la calificación
       const response = await courseRating.create(data);
       // Llamada a updateAverageRating del CourseController
-      await CourseController.updateAverageRating(data.course);
+      await updateAverageRating(data.course);
       res
         .status(201)
         .json({ message: "Rating created successfully", response });
