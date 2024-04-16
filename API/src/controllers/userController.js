@@ -78,7 +78,7 @@ class UserController {
       next(error);
     }
   };
-
+  //Controladores auxiliares
   updateAverageRating = async (userId) => {
     try {
       const ratings = await this.controller.read({ tutor: userId });
@@ -93,6 +93,19 @@ class UserController {
       console.error("Error updating average rating: " + error.message);
     }
   };
+
+  readRatingsByUser = async (userId) => {
+    try {
+      const ratings = await this.controller.read({ tutor: userId });
+      if (ratings.length === 0) {
+        console.log("No ratings found for this tutor");
+        return;
+      }
+      return ratings;
+    } catch (error) {
+      console.error("Error reading ratings: " + error.message);
+    }
+  };
 }
 
 const controller = new UserController(users);
@@ -104,4 +117,5 @@ export const {
   update,
   readByRole,
   updateAverageRating,
+  readRatingsByUser,
 } = controller;
