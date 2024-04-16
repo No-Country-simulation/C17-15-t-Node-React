@@ -18,9 +18,9 @@ class MongoManager {
       throw error;
     }
   }
-  async read(query = {}) {
+  async read(filter, sortAndPaginate) {
     try {
-      const results = await this.model.find(query);
+      const results = await this.model.paginate(filter, sortAndPaginate);
       return results;
     } catch (error) {
       throw error;

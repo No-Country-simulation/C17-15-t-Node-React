@@ -19,19 +19,37 @@ class UserController {
   };
   read = async (req, res, next) => {
     try {
-      const response = await this.controller.read();
-      return res.json({
-        statusCode: 200,
-        response,
-      });
+      const sortAndPaginate = {
+        limit: req.query.limit || 10,
+        page: req.query.page || 1,
+        sort: { name: 1 }
+      }
+
+      const filter = {}
+
+      if(req.query.name) {
+        filter.name = new RegExp(req.query.name.trim(), 'i')
+      }
+
+      const response = await this.controller.read(filter, sortAndPaginate);
+      if (response.docs.length > 0) {
+        return res.json({
+          statusCode: 200,
+          response,
+        });
+      } else {
+        const error = new Error("not found documents")
+        error.statusCode = 404
+        throw error
+      }
     } catch (error) {
       next(error);
     }
   };
   readOne = async (req, res, next) => {
     try {
-      const { aid } = req.params;
-      const response = await this.controller.readOne(aid);
+      const { uid } = req.params;
+      const response = await this.controller.readOne(uid);
       return res.json({
         statusCode: 200,
         response,
@@ -42,8 +60,8 @@ class UserController {
   };
   destroy = async (req, res, next) => {
     try {
-      const { aid } = req.params;
-      const response = await this.controller.delete(aid);
+      const { uid } = req.params;
+      const response = await this.controller.delete(uid);
       return res.json({
         statusCode: 200,
         response,
@@ -54,10 +72,10 @@ class UserController {
   };
   update = async (req, res, next) => {
     try {
-      const { aid } = req.params;
+      const { uid } = req.params;
       const data = req.body;
       const opts = { new: true };
-      const response = await this.controller.update(aid, data, opts);
+      const response = await this.controller.update(uid, data, opts);
       return res.json({
         statusCode: 200,
         response,
@@ -94,16 +112,21 @@ class UserController {
     }
   };
 
-  readRatingsByUser = async (userId) => {
+  readRatingsByUser = async (req, res, next) => {
     try {
-      const ratings = await this.controller.read({ tutor: userId });
+      const { uid } = req.params
+      const ratings = await this.controller.read({ tutor: uid });
       if (ratings.length === 0) {
-        console.log("No ratings found for this tutor");
-        return;
+        const error = new Error("no ratings found")
+        error.statusCode = 404
+        throw error
       }
-      return ratings;
+      return res.json({
+        response: ratings,
+        statusCode
+      });
     } catch (error) {
-      console.error("Error reading ratings: " + error.message);
+      next(error)
     }
   };
 }

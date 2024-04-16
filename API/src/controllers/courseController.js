@@ -13,9 +13,7 @@ class CourseController {
         response,
       });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error creating course: " + error.message });
+      next(error)
     }
   };
 
