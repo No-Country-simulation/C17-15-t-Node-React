@@ -10,6 +10,12 @@ import {
   readOneContent,
   updateContent,
   deleteContent,
+  addPendingStudent,
+  removePendingStudent,
+  approvePendingStudent,
+  updateAverageRating,
+  listEnrolledStudents,
+  changeCourseStatus,
 } from "../../controllers/courseController.js";
 
 const coursesRouter = Router();
@@ -27,5 +33,23 @@ coursesRouter.get("/:courseId/contents", readContents);
 coursesRouter.get("/:courseId/contents/:contentId", readOneContent);
 coursesRouter.put("/:courseId/contents/:contentId", updateContent);
 coursesRouter.delete("/:courseId/contents/:contentId", deleteContent);
+
+// Operaciones para manejar el flujo de estudiantes
+coursesRouter.post("/:courseId/students/pending", addPendingStudent);
+coursesRouter.delete(
+  "/:courseId/students/pending/:studentId",
+  removePendingStudent
+);
+coursesRouter.put(
+  "/:courseId/students/pending/:studentId",
+  approvePendingStudent
+);
+
+// Operaciones para manejar la actualización de la calificación promedio
+coursesRouter.put("/:courseId/ratings/average", updateAverageRating);
+
+// Operaciones auxiliares
+coursesRouter.get("/:courseId/students", listEnrolledStudents);
+coursesRouter.put("/:courseId/status", changeCourseStatus);
 
 export default coursesRouter;
