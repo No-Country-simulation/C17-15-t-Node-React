@@ -6,6 +6,7 @@ import {
   destroy,
   update,
   readByRole,
+  readRatingsByUser,
 } from "../../controllers/userController.js";
 
 const usersRouter = Router();
@@ -16,5 +17,6 @@ usersRouter.get("/:uid", readOne);
 usersRouter.put("/:uid", update);
 usersRouter.delete("/:uid", destroy);
 usersRouter.get("/role/:role", readByRole); //busca todo los que tienen x rol
+usersRouter.get("/:uid/ratings", readRatingsByUser);
 
 export default usersRouter;

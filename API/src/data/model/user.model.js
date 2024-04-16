@@ -53,15 +53,6 @@ const schema = new Schema(
         return this.role === "tutor";
       },
     },
-    given_sessions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Session",
-        required: function () {
-          return this.role === "tutor";
-        },
-      },
-    ],
     // Atributos de admin
   },
   { timestamps: true }

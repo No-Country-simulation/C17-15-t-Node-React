@@ -16,6 +16,7 @@ import {
   updateAverageRating,
   listEnrolledStudents,
   changeCourseStatus,
+  readAllRatingsByCourse,
 } from "../../controllers/courseController.js";
 
 const coursesRouter = Router();
@@ -51,5 +52,6 @@ coursesRouter.put("/:courseId/ratings/average", updateAverageRating);
 // Operaciones auxiliares
 coursesRouter.get("/:courseId/students", listEnrolledStudents);
 coursesRouter.put("/:courseId/status", changeCourseStatus);
+coursesRouter.get("/:courseId/ratings", readAllRatingsByCourse);
 
 export default coursesRouter;

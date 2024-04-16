@@ -329,7 +329,7 @@ class CourseController {
       });
     }
   };
-
+  // Actualizar el promedio de calificaciones de un curso
   updateAverageRating = async (courseId) => {
     try {
       const course = await this.controller.readOne(courseId);
@@ -381,6 +381,19 @@ class CourseController {
         .json({ message: `Error changing course status: ${error.message}` });
     }
   };
+
+  readAllRatingsByCourse = async (req, res) => {
+    try {
+      const { courseId } = req.params;
+      const course = await this.findCourse(courseId);
+      const ratings = await CourseRating.find({ course: courseId });
+      res.status(200).json(ratings);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: `Error reading ratings: ${error.message}` });
+    }
+  };
 }
 
 const controller = new CourseController(course);
@@ -401,4 +414,5 @@ export const {
   updateAverageRating,
   listEnrolledStudents,
   changeCourseStatus,
+  readAllRatingsByCourse,
 } = controller;
