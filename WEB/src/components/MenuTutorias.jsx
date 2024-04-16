@@ -1,42 +1,82 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import MenuCardSectionDesarrollo from './MenuCardSectionDesarollo';
 import MenuCardSectionDiseño from './MenuCardSectionDiseño';
 import MenuCardSectionEdicionVideo from './MenuCardSectionEdicionVideo';
 import MenuCardSectionDestacado from './MenuCardSectionDestacado';
 
 const MenuTutorias = () => {
+  const [activeSection, setActiveSection] = useState('destacado');
+
+  const handleSectionChange = (section) => {
+    setActiveSection(section);
+  };
+
+  let activeSectionComponent;
+  switch (activeSection) {
+    case 'destacado':
+      activeSectionComponent = <MenuCardSectionDestacado />;
+      break;
+    case 'diseño':
+      activeSectionComponent = <MenuCardSectionDiseño />;
+      break;
+    case 'ediciondevideo':
+      activeSectionComponent = <MenuCardSectionEdicionVideo />;
+      break;
+    case 'desarollo':
+      activeSectionComponent = <MenuCardSectionDesarrollo />;
+      break;
+    default:
+      activeSectionComponent = null;
+  }
 
   return (
-    <Router>
-      <div>
-
-        <nav>
-          <ul class="flex border-b">
-            <li class="mr-1">
-              <li class="bg-white inline-block py-2 px-4 text-blue-700 font-semibold"><Link exact to="/">Destacado</Link></li>
-            </li>
-            <li class="mr-1">
-              <Link class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" to="/diseño">Diseño</Link>
-            </li>
-            <li class="mr-1">
-              <Link class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" to="/ediciondevideo">Edicion de video</Link>
-            </li>
-            <li class="mr-1">
-              <Link class="bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold" to="/desarollo">Desarrollo</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Routes>
-          <Route path='/' element={<MenuCardSectionDestacado />} />
-          <Route path="/diseño" element={<MenuCardSectionDiseño />} />
-          <Route path="/ediciondevideo" element={<MenuCardSectionEdicionVideo />} />
-          <Route path="/desarollo" element={<MenuCardSectionDesarrollo />} />
-        </Routes>
-
-      </div>
-
-    </Router>
+    <div>
+      <nav>
+        <ul className="flex border-b">
+          <li className="mr-1">
+            <button
+              className={`bg-white inline-block py-2 px-4 text-blue-700 font-semibold ${
+                activeSection === 'destacado' ? 'text-blue-700' : 'text-blue-500 hover:text-blue-800'
+              }`}
+              onClick={() => handleSectionChange('destacado')}
+            >
+              Destacado
+            </button>
+          </li>
+          <li className="mr-1">
+            <button
+              className={`bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold ${
+                activeSection === 'diseño' ? 'text-blue-700' : 'text-blue-500 hover:text-blue-800'
+              }`}
+              onClick={() => handleSectionChange('diseño')}
+            >
+              Diseño
+            </button>
+          </li>
+          <li className="mr-1">
+            <button
+              className={`bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold ${
+                activeSection === 'ediciondevideo' ? 'text-blue-700' : 'text-blue-500 hover:text-blue-800'
+              }`}
+              onClick={() => handleSectionChange('ediciondevideo')}
+            >
+              Edición de video
+            </button>
+          </li>
+          <li className="mr-1">
+            <button
+              className={`bg-white inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold ${
+                activeSection === 'desarollo' ? 'text-blue-700' : 'text-blue-500 hover:text-blue-800'
+              }`}
+              onClick={() => handleSectionChange('desarollo')}
+            >
+              Desarrollo
+            </button>
+          </li>
+        </ul>
+      </nav>
+      {activeSectionComponent}
+    </div>
   );
 };
 
