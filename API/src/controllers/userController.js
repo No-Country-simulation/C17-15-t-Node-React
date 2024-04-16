@@ -1,4 +1,4 @@
-import users from "../data/model/user.model.js";
+import { users } from "../data/mongoManager.js";
 
 class UserController {
   constructor() {
