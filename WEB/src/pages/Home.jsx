@@ -10,9 +10,8 @@ export default function Home() {
   return (
     <>
       <ProfesorDestacado />
-      <MenuTutorias></MenuTutorias>
+      {/*<MenuTutorias></MenuTutorias>*/}
       <Testimonial />
-      <Footer />
     </>
   );
 };
