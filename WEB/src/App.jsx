@@ -6,6 +6,7 @@ import { About } from './pages/About';
 import { Services } from './pages/Services';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { Courses } from './pages/Courses';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
       <Footer /> {/* Render Footer after Routes */}
     </Router>

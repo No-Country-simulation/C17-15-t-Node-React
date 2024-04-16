@@ -8,6 +8,7 @@ export const Navbar = () => {
     { to: '/about', label: 'About' },
     { to: '/contact', label: 'Contact' },
     { to: '/services', label: 'services' },
+    { to: '/courses', label: 'Courses' },
   ];
 
   return (
