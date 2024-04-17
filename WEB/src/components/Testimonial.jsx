@@ -11,20 +11,20 @@ export function Testimonial() {
   return (
     <div className="flex flex-col p-8 m-auto gap-6 items-center justify-center ">
       <div className="flex flex-col items-center justify-center">
-        <div className="text-5xl font-extrabold mb-8">
+        <div className="text-6xl font-extrabold mb-8">
           <span className="bg-clip-text text-transparent bg-gradient-to-br from-primary to-secondary">Testimonios que inspiran</span>
         </div>
-        <Typography className="mb-5">
+        <Typography variant="h4" className="mb-5">
           Descubre lo que dicen nuestros estudiantes sobre sus experiencias con
           MasterAula
         </Typography>
       </div>
 
-      <div className="flex lg:m-auto gap-6 items-center justify-center">
+      <div className="flex m-auto gap-6 items-center justify-center">
         <Card
           color="transparent"
           shadow={false}
-          className="w-full max-w-[26rem] border border-sky-500 px-5 py-1"
+          className="w-full max-w-[26rem] border-2 border-sky-500 px-5 py-1"
         >
           <CardHeader
             color="transparent"
