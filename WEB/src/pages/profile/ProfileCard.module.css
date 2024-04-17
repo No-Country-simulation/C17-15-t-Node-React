@@ -1,0 +1,43 @@
+.container{
+  width: 90%;
+  margin: 2% auto;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+.profileImg{
+  border-radius: 50%;
+  overflow: hidden;
+  width: 50%; 
+  height: 50%;
+}
+
+.tablaContainer {
+  width: 100%;
+  max-width: 600px; /* Ancho máximo de la tabla */
+  margin: 0 auto; /* Centrar la tabla horizontalmente */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Para que los bordes de las celdas se fusionen */
+}
+
+td {
+  border: 1px solid #ddd; /* Borde de las celdas */
+  padding: 10px; /* Espaciado interno de las celdas */
+  text-align: left; /* Alineación del texto a la izquierda */
+}
+
+.nombre {
+  font-weight: bold; /* Estilo para el nombre (negrita, por ejemplo) */
+}
+
+.valor {
+  color: #007bff; /* Color del texto para el valor (por ejemplo, azul) */
+}
+.imgAndInfo{
+  width: 100%;
+  display: flex;
+}
