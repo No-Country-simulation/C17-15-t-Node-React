@@ -1,4 +1,5 @@
 import { rating } from "../data/mongoManager.js";
+import { updateAverageRating } from "./userController.js";
 
 class RatingController {
   constructor() {
@@ -9,6 +10,8 @@ class RatingController {
     try {
       const data = req.body;
       const response = await this.controller.create(data);
+      // Actualizacion del average rating del usuario
+      await updateAverageRating(data.userId, data.rating);
       res.status(201).json(response);
     } catch (error) {
       res

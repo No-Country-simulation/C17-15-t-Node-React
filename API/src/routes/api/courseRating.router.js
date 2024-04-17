@@ -7,6 +7,7 @@ import {
 
 const courseRatingsRouter = Router();
 
+
 // Rutas para las operaciones de calificaciones de cursos
 courseRatingsRouter.post("/:courseId/ratings", create);
 courseRatingsRouter.get("/:courseId/ratings", read);
