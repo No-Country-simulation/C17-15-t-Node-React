@@ -1,7 +1,8 @@
-import mongoose from "mongoose";
+import { Schema, model, Types } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
-const { Schema, model } = mongoose;
+
+const collection = "Course"
 
 // Definición del esquema para los contenidos del curso
 const courseContentSchema = new Schema(
@@ -17,11 +18,11 @@ const courseContentSchema = new Schema(
 );
 
 // Definición del esquema principal del curso
-const courseSchema = new Schema(
+const schema = new Schema(
   {
     title: { type: String, required: true },
-    tutor: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    subject: { type: Schema.Types.ObjectId, ref: "Subject", required: true },
+    tutor_id: { type: Types.ObjectId, ref: "User", required: true },
+    subject_id: { type: Types.ObjectId, ref: "Subject", required: true },
     description: { type: String, required: true },
     duration: { type: Number, required: true },
     price: { type: Number, required: true },
@@ -34,25 +35,25 @@ const courseSchema = new Schema(
         "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg",
     },
     status: { type: String, required: true },
-    enrolled_students: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    pending_students: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    ratings: [{ type: Schema.Types.ObjectId, ref: "CourseRating" }],
+    enrolled_students: [{ type: Types.ObjectId, ref: "User" }],
+    pending_students: [{ type: Types.ObjectId, ref: "User" }],
+    ratings: [{ type: Types.ObjectId, ref: "CourseRating" }],
     avg_rating: { type: Number, required: true, default: 0 },
     contents: [courseContentSchema], // Arreglo de contenidos
   },
   { timestamps: true }
 );
 
-courseSchema.plugin(mongoosePaginate);
+schema.plugin(mongoosePaginate);
 
-courseSchema.pre("find", function() {
-  this.populate("tutor_id", "-password -createdAt -updatedAt -__v")
-})
+schema.pre("find", function() {
+  this.populate("tutor_id");
+});
 
-courseSchema.pre("find", function() {
-  this.populate("subject_id", "-createdAt -updatedAt -__v")
-})
+schema.pre("find", function() {
+  this.populate("subject_id");
+});
 
-const Course = model("Course", courseSchema);
+const Course = model(collection, schema);
 
 export default Course;
