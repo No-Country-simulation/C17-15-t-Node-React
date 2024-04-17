@@ -36,6 +36,14 @@ const courseSchema = new Schema(
 
 courseSchema.plugin(mongoosePaginate);
 
+courseSchema.pre("find", function() {
+  this.populate("tutor_id", "-password -createdAt -updatedAt -__v")
+})
+
+courseSchema.pre("find", function() {
+  this.populate("subject_id", "-createdAt -updatedAt -__v")
+})
+
 const Course = model("Course", courseSchema);
 
 export default Course;
