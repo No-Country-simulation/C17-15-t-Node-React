@@ -46,12 +46,14 @@ const schema = new Schema(
 
 schema.plugin(mongoosePaginate);
 
-schema.pre("find", function() {
-  this.populate("tutor_id");
+schema.pre("findOne", function() {
+  this.populate("tutor_id", "-verified -verifyCode -password -__v -createdAt -updatedAt");
+  this.populate("subject_id", "-__v -createdAt -updatedAt");
 });
 
 schema.pre("find", function() {
-  this.populate("subject_id");
+  this.populate("tutor_id", "-password -__v -createdAt -updatedAt");
+  this.populate("subject_id", "-__v -createdAt -updatedAt");
 });
 
 const Course = model(collection, schema);
