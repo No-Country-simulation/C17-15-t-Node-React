@@ -80,9 +80,9 @@ export default function SeacrhCourses() {
           />
         </div>
       </div>
-      <div className="flex flex-wrap gap-10 p-10 mx-[170px]">
+      <div className="flex flex-wrap gap-10 p-10 mx-[170px] ">
         {courses.map((course) => (
-          <Card key={course._id} className="mt-6 w-96">
+          <Card key={course._id} className="mt-6 w-96 bg-gray-50">
             <CardHeader color="blue-gray" className="relative h-56  ">
               <img
                 src={course.thumbnail}
@@ -90,13 +90,22 @@ export default function SeacrhCourses() {
                 className="object-cover w-full h-full"
               />
             </CardHeader>
-            <CardBody className="h-[250px]" >
-              <Typography variant="h3">{course.title}</Typography>
-
-              <Typography className="">{course.description}</Typography>
+            <CardBody className="h-[200px] flex flex-col pb-1" >
+              <Typography variant="h3" className="w-[250px]">{course.title}</Typography>
+              <div className="flex justify-between items-center">
+              <Typography variant="h6">{course.tutor_id.name}</Typography>
+              <Typography variant="h6" className="text-primary capitalize" >{course.level}</Typography>
+              </div>
+              <Typography variant="h6" className="truncate font-light mt-2">{course.description}</Typography>
             </CardBody>
-            <CardFooter className="pt-0 flex items-end bottom-0">
-              <Button className="bg-gradient-to-tr from-primary to-secondary text-md">{`$ ${course.price}`}</Button>
+            <CardFooter className="pt-2 flex justify-between bottom-0 border-t-2 border-gray-300">
+                            
+            <Typography className="text-xl font-bold">
+                {`$ ${course.price}`}
+              </Typography>
+              <Button className="bg-gradient-to-tr from-primary to-secondary text-md">
+                Comprar
+              </Button>
             </CardFooter>
           </Card>
         ))}
