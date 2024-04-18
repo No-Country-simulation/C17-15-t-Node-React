@@ -23,15 +23,18 @@ export default function SeacrhCourses() {
           throw new Error("Error al obtener los cursos");
         }
         const responseData = await response.json();
-        console.log(responseData.response.docs)
+        console.log(responseData.response.docs);// console.log(responseData.response.docs);
         let coursesData = [];
 
         // Verificar el formato de la respuesta
-        if (responseData.statusCode === 200 && Array.isArray(responseData.response.docs)) {
+        if (
+          responseData.statusCode === 200 &&
+          Array.isArray(responseData.response.docs)// Array.isArray(responseData.response.docs)
+        ) {
           // Si la respuesta tiene statusCode 200 y contiene un array de cursos
-          coursesData = responseData.response.docs;
+          coursesData = responseData.response.docs; //          coursesData = responseData.response.docs;
           setOriginalCourses(coursesData); // Guardar los cursos originales
-          setCourses(coursesData)
+          setCourses(coursesData);
         } else {
           throw new Error("Los datos recibidos no son válidos");
         }
@@ -64,11 +67,13 @@ export default function SeacrhCourses() {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center items-center">
-      <div className="text-6xl font-extrabold mb-8 mt-[100px]">
-          <span className="bg-clip-text text-transparent text-center bg-gradient-to-br from-primary to-secondary">Cursos Online</span>
+        <div className="text-6xl font-extrabold mb-8 mt-[100px]">
+          <span className="bg-clip-text text-transparent text-center bg-gradient-to-br from-primary to-secondary">
+            Cursos Online
+          </span>
         </div>
         <Typography variant="h3" className="text-center">
-            Más que cursos, una experiencia de aprendizaje
+          Más que cursos, una experiencia de aprendizaje
         </Typography>
         <div className="mt-8 borde-2 border-gray-600 w-[900px]">
           <input
@@ -90,17 +95,44 @@ export default function SeacrhCourses() {
                 className="object-cover w-full h-full"
               />
             </CardHeader>
-            <CardBody className="h-[200px] flex flex-col pb-1" >
-              <Typography variant="h3" className="w-[250px]">{course.title}</Typography>
+            <CardBody className="h-[200px] flex flex-col pb-1">
               <div className="flex justify-between items-center">
-              <Typography variant="h6">{course.tutor_id.name}</Typography>
-              <Typography variant="h6" className="text-primary capitalize" >{course.level}</Typography>
+                <Typography variant="h3" className="w-[280px]">
+                  {course.title}
+                </Typography>
+                <div className="mb-3 flex items-center justify-between">
+                  <Typography
+                    color="blue-gray"
+                    className="flex items-center gap-1.5 font-normal"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="-mt-0.5 h-5 w-5 text-yellow-700"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    5.0
+                  </Typography>
+                </div>
               </div>
-              <Typography variant="h6" className="truncate font-light mt-2">{course.description}</Typography>
+              <div className="flex justify-between items-center">
+                <Typography variant="h6">{course.tutor_id.name}</Typography>
+                <Typography variant="h6" className="text-primary capitalize">
+                  {course.level}
+                </Typography>
+              </div>
+              <Typography variant="h6" className="truncate font-light mt-2">
+                {course.description}
+              </Typography>
             </CardBody>
             <CardFooter className="pt-2 flex justify-between bottom-0 border-t-2 border-gray-300">
-                            
-            <Typography className="text-xl font-bold">
+              <Typography className="text-xl font-bold">
                 {`$ ${course.price}`}
               </Typography>
               <Button className="bg-gradient-to-tr from-primary to-secondary text-md">
