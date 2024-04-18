@@ -23,16 +23,15 @@ export default function SeacrhCourses() {
           throw new Error("Error al obtener los cursos");
         }
         const responseData = await response.json();
+        console.log(responseData.response.docs)
         let coursesData = [];
 
         // Verificar el formato de la respuesta
-        if (
-          responseData.statusCode === 200 &&
-          Array.isArray(responseData.response)
-        ) {
+        if (responseData.statusCode === 200 && Array.isArray(responseData.response.docs)) {
           // Si la respuesta tiene statusCode 200 y contiene un array de cursos
-          coursesData = responseData.response;
+          coursesData = responseData.response.docs;
           setOriginalCourses(coursesData); // Guardar los cursos originales
+          setCourses(coursesData)
         } else {
           throw new Error("Los datos recibidos no son válidos");
         }
@@ -81,13 +80,14 @@ export default function SeacrhCourses() {
           />
         </div>
       </div>
-      <div className="flex flex-wrap gap-10 p-10 justify-between mx-[150px]">
+      <div className="flex flex-wrap gap-10 p-10 mx-[170px]">
         {courses.map((course) => (
           <Card key={course._id} className="mt-6 w-96">
             <CardHeader color="blue-gray" className="relative h-56  ">
               <img
-                src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                src={course.thumbnail}
                 alt="card-image"
+                className="object-cover w-full h-full"
               />
             </CardHeader>
             <CardBody className="h-[250px]" >
