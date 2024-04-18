@@ -11,16 +11,15 @@
 }
 .content {
   width: 100%;
-
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: space-around;
 }
 .profImg {
   width: 500px;
 }
 .info {
-  max-width: 400px;
+  max-width: 500px;
   padding: 15px;
   display: flex;
   flex-flow: row wrap;
@@ -38,8 +37,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 25px;
+  gap: 40px;
 }
+
 h4,
 p {
   margin: 15px 0;
@@ -47,9 +47,14 @@ p {
 @media screen and (max-width: 767px) {
   .whatsapp,
   .tool {
+    width: 100%;
     display: flex;
+    flex-flow: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    gap: 0;
+  }
+
+  .icon{
+    margin: 10px;
   }
 }
