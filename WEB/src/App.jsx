@@ -1,3 +1,9 @@
+import "./App.css";
+import { Footer } from "./components/Footer";
+import { Testimonial } from "./components/Testimonial";
+import { Navbar } from "./components/Navbar";
+import MenuTutorias from "./components/MenuTutorias";
+import ProfesorDestacado from "./components/ProfesorDestacado";
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import  Home  from './pages/Home'; // Assuming Home is imported
@@ -11,6 +17,7 @@ import { Profile } from './pages/Profile';
 
 const App = () => {
   return (
+
     <Router>
       <NavBar /> {/* Render Navbar before Routes */}
       <Routes>
