@@ -2,7 +2,7 @@ import { Carousel } from "@material-tailwind/react";
  
 export function Banner() {
   return (
-    <Carousel className="rounded-xl">
+    <Carousel className="">
       <img
         src= "./src/assets/MasterAula-slogan.png"
         alt="image 1"
