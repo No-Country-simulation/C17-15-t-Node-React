@@ -1,37 +1,45 @@
 import { faker } from '@faker-js/faker';
-import mongoose from 'mongoose'; // Agregar esta línea para importar mongoose
-
 import dbConnection from '../dbConnection.js';
-import Course from '../../data/model/course.model.js'; // Importar el modelo de curso
+import Course from '../../data/model/course.model.js';
+import User from '../../data/model/user.model.js';
+import Subject from '../../data/model/subject.model.js'; // Importa el modelo de Subject
 
-// Conectar a la base de datos MongoDB y generar datos ficticios
 const generarDatosFicticios = async () => {
   try {
-    await dbConnection(); // Conectar a la base de datos
+    await dbConnection();
+    // Busca usuarios con el rol de "tutor"
+    const tutores = await User.find({ role: 'tutor' });
 
-    // Generar datos ficticios de cursos
+    // Obtiene los IDs de los tutores
+    const tutors = tutores.map(tutor => tutor._id);
+    const subjects = await Subject.find({}, '_id');
+
     for (let i = 0; i < 10; i++) {
       const courseContents = [];
-      const numContents = faker.number.int({ min: 1, max: 10 }); // Generar un número aleatorio de contenidos para cada curso
+      const numContents = faker.number.int({ min: 1, max: 10 });
+
       for (let j = 0; j < numContents; j++) {
         const content = {
           title: faker.lorem.words(),
           description: faker.lorem.sentence(),
           type: faker.helpers.arrayElement(['video', 'audio', 'documento']),
           url: faker.internet.url(),
-          duration: faker.number.int({ min: 1, max: 60 }), // Duración en minutos
-          order: j + 1, // Orden consecutivo de los contenidos
+          duration: faker.number.int({ min: 1, max: 60 }),
+          order: j + 1,
         };
         courseContents.push(content);
       }
 
+      const randomTutorId = faker.helpers.arrayElement(tutors.map(tutor => tutor._id));
+      const randomSubjectId = faker.helpers.arrayElement(subjects.map(subject => subject._id));
+
       const course = new Course({
         title: faker.lorem.words(),
-        tutor: new mongoose.Types.ObjectId(), // Generar un ID de tutor aleatorio
-        subject: new mongoose.Types.ObjectId(), // Generar un ID de asignatura aleatorio
+        tutor_id: randomTutorId,
+        subject_id: randomSubjectId,
         description: faker.lorem.paragraph(),
-        duration: faker.number.int({ min: 1, max: 100 }), // Duración en horas
-        price: faker.number.int({ min: 10, max: 1000 }), // Precio en tu moneda local
+        duration: faker.number.int({ min: 1, max: 100 }),
+        price: faker.number.int({ min: 10, max: 1000 }),
         language: faker.helpers.arrayElement(['en', 'es', 'fr', 'de']),
         level: faker.helpers.arrayElement(['beginner', 'intermediate', 'advanced']),
         thumbnail: faker.image.url(),
@@ -39,7 +47,7 @@ const generarDatosFicticios = async () => {
         contents: courseContents,
       });
 
-      await course.save(); // Esperar a que se guarde el curso
+      await course.save();
       console.log('Curso creado:', course);
     }
 
@@ -49,5 +57,4 @@ const generarDatosFicticios = async () => {
   }
 };
 
-// Llama a la función para generar datos ficticios
 generarDatosFicticios();

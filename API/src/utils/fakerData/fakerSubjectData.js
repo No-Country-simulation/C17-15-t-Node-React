@@ -12,7 +12,7 @@ const generarDatosFicticios = async () => {
     // Generar datos ficticios de asignaturas
     for (let i = 0; i < 10; i++) { // Generar 10 asignaturas ficticias
       const subject = new Subject({
-        name: faker.lorem.words(),
+        name: faker.helpers.arrayElement(['SQL', 'JAVA', 'PYTHON', 'Matematica', 'Language', 'Science','Node Js', 'Figma']),
         description: faker.lorem.paragraph(),
       });
 
