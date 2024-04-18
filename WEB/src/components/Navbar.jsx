@@ -7,6 +7,8 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { ButtonRegistrateNavBar } from "./ButtonRegistrateNavBar";
+import { ButtonLogInNavBar } from "./ButtonLogInNavBar";
 
 export const NavBar = () => {
   const links = [
@@ -56,21 +58,9 @@ export const NavBar = () => {
             </Typography>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
-              <div className="flex items-center gap-x-1">
-                <Button
-                  variant="text"
-                  size="sm"
-                  className="hidden lg:inline-block"
-                >
-                  <span>Log In</span>
-                </Button>
-                <Button
-                  variant="gradient"
-                  size="sm"
-                  className="hidden lg:inline-block"
-                >
-                  <span>Sign in</span>
-                </Button>
+              <div className="flex items-center gap-x-4">
+                <ButtonRegistrateNavBar />
+                <ButtonLogInNavBar />
               </div>
               <IconButton
                 variant="text"

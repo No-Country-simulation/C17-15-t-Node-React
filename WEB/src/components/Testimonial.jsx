@@ -30,7 +30,7 @@ export function Testimonial() {
             color="transparent"
             floated={false}
             shadow={false}
-            className="mx-0 flex items-center gap-4 pt-0 pb-8"
+            className="mx-0 flex items-center gap-4 pt-0"
           >
             <Avatar
               size="lg"
@@ -44,7 +44,7 @@ export function Testimonial() {
                   Tania Andrew
                 </Typography>
               </div>
-              <Typography color="blue-gray">Argentina</Typography>
+              <Typography variant="h6" color="blue-gray" className="font-light">Argentina</Typography>
             </div>
           </CardHeader>
           <CardBody className="mb-6 p-0">
@@ -64,7 +64,7 @@ export function Testimonial() {
             color="transparent"
             floated={false}
             shadow={false}
-            className="mx-0 flex items-center gap-4 pt-0 pb-8"
+            className="mx-0 flex items-center gap-4 pt-0"
           >
             <Avatar
               size="lg"
@@ -78,7 +78,7 @@ export function Testimonial() {
                   Tania Andrew
                 </Typography>
               </div>
-              <Typography color="blue-gray">Argentina</Typography>
+              <Typography variant="h6" color="blue-gray" className="font-light">Argentina</Typography>
             </div>
           </CardHeader>
           <CardBody className="mb-6 p-0">
@@ -98,7 +98,7 @@ export function Testimonial() {
             color="transparent"
             floated={false}
             shadow={false}
-            className="mx-0 flex items-center gap-4 pt-0 pb-8"
+            className="mx-0 flex items-center gap-4 pt-0"
           >
             <Avatar
               size="lg"
@@ -112,7 +112,7 @@ export function Testimonial() {
                   Tania Andrew
                 </Typography>
               </div>
-              <Typography color="blue-gray">Argentina</Typography>
+              <Typography variant="h6" color="blue-gray" className="font-light">Argentina</Typography>
             </div>
           </CardHeader>
           <CardBody className="mb-6 p-0">
