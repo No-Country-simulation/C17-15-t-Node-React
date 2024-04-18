@@ -12,7 +12,7 @@ export function ButtonLogInNavBar() {
  
   return (
     <>
-      <Button onClick={handleOpen} variant="gradient" className="" >
+      <Button onClick={handleOpen} variant="gradient" color="purple" size="lg" >
         Log In
       </Button>
       <Dialog open={open} handler={handleOpen} className="flex flex-col justify-center items-center p-5">
