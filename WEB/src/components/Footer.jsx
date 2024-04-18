@@ -118,7 +118,7 @@ export function Footer() {
             className="mb-4 text-center font-normal md:mb-0"
           >
             &copy; {currentYear}{" "}
-            <a href="https://material-tailwind.com/">WebApp Tutorias/Cursos</a>.
+            <a href="https://material-tailwind.com/">MasterAula</a>.
             All Rights Reserved.
           </Typography>
           <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
