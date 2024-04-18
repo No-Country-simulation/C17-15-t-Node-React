@@ -13,7 +13,7 @@ export function ButtonRegistrateNavBar() {
  
   return (
     <>
-      <Button onClick={handleOpen} variant="gradient" >
+      <Button onClick={handleOpen} variant="gradient" color="purple" size="lg" >
         Regístrate
       </Button>
       <Dialog open={open} handler={handleOpen} className="flex flex-col justify-center items-center p-5">
