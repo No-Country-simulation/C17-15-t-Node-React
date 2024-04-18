@@ -9,6 +9,7 @@ import { NavBar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Courses } from "./pages/Courses";
 import { Profile } from "./pages/Profile";
+import { CourseDetailContainer } from "./components/CourseDetailContainer/CourseDetailContainer";
 const App = () => {
   return (
     <Router>
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/course/:cid" element={<CourseDetailContainer />}/>
       </Routes>
       <Footer /> {/* Render Footer after Routes */}
     </Router>
