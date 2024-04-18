@@ -5,31 +5,23 @@ import { MdLabelOutline } from "react-icons/md";
 function ProfesorDestacado({ name, phrase, img, whatsnumber, tool, whytool }) {
   return (
     // quise mejorar el responsive pero no pude
-    <div className="profesorDestacado bg-gray-800 text-white p-4 lg:flex lg:items-center lg:p-8">
-      <div className="header lg:w-1/2">
-        <h1>{name}</h1>
-        <h6>{phrase}</h6>
+    <div className="profesorDestacado shadow-md border border-gray-300 p-6 rounded-xl   lg:flex lg:items-center lg:p-8 font-sans">
+      <div className="header  ">
+        <h1 className="text-3xl font-bold  mb-4">{name}</h1>
+        <h6 className="text-xl  mb-2">{phrase}</h6>
       </div>
-      <div className="content lg:w-1/2 lg:flex lg:justify-around">
-        <img
-          className="lg:w-48 lg:h-48"
-          src={img}
-          alt=""
-        />
-        <div className="info lg:w-1/2 lg:text-left">
-          <div className="whatsapp flex items-center">
+      <div className="content">
+        <img className="profImg .shadow-lg rounded-xl " src={img} alt="" />
+        <div className="info">
+          <div className="whatsapp ">
             <FaWhatsapp className="icon" />
-            <div>
-              <h4>Whatsapp</h4>
-              <p>{whatsnumber}</p>
-            </div>
+            <h4>Whatsapp</h4>
+            <p>{whatsnumber}</p>
           </div>
-          <div className="tool mt-4">
+          <div className="tool">
             <MdLabelOutline className="icon" />
-            <div>
-              <h4>{tool}</h4>
-              <p>{whytool}</p>
-            </div>
+            <h4>{tool}</h4>
+            <p>{whytool}</p>
           </div>
         </div>
       </div>

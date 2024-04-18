@@ -1,42 +1,55 @@
 .profesorDestacado {
-  width: 90%;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 40px;
 }
 .header {
   text-align: center;
 }
 .content {
+  width: 100%;
+
   display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
-img {
-  flex: 1;
-  min-width: 400px;
+.profImg {
+  width: 500px;
 }
 .info {
-  min-width: 400px;
-  flex: 1;
+  max-width: 400px;
   padding: 15px;
+  display: flex;
+  flex-flow: row wrap;
 }
 .icon {
   background-color: aliceblue;
   color: black;
   border-radius: 6px;
   font-size: 30px;
+  margin: 25px;
+  min-width: 30px;
 }
 .whatsapp,
 .tool {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-.tool div {
-  flex: 1;
-  max-width: 80px;
+  justify-content: space-between;
+  gap: 25px;
 }
 h4,
 p {
   margin: 15px 0;
+}
+@media screen and (max-width: 767px) {
+  .whatsapp,
+  .tool {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
 }
