@@ -19,7 +19,7 @@ class UserController {
   };
   read = async (req, res, next) => {
     try {
-      const sortAndPaginate = {
+      const options = {
         limit: req.query.limit || 10,
         page: req.query.page || 1,
         sort: { name: 1 }
@@ -31,7 +31,8 @@ class UserController {
         filter.name = new RegExp(req.query.name.trim(), 'i')
       }
 
-      const response = await this.controller.read(filter, sortAndPaginate);
+      const response = await this.controller.read(filter, options);
+      console.log(response)
       if (response.docs.length > 0) {
         return res.json({
           statusCode: 200,

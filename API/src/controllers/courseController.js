@@ -19,36 +19,44 @@ class CourseController {
 
   read = async (req, res, next) => {
     try {
-      const response = await this.controller.read();
-      if (response.length === 0) {
-        return res.status(404).json({ message: "No courses found" });
+      const options = {
+        limit: req.query.limit || 10,
+        page: req.query.page || 1,
+        sort: { name: 1 }
       }
-      res.json({
-        statusCode: 200,
-        response,
-      });
+
+      const filter = {}
+
+      if(req.query.name) {
+        filter.name = new RegExp(req.query.name.trim(), 'i')
+      }
+
+      const response = await this.controller.read(filter, options);
+      console.log(response)
+      if (response.docs.length > 0) {
+        return res.json({
+          statusCode: 200,
+          response,
+        });
+      } else {
+        const error = new Error("not found documents")
+        error.statusCode = 404
+        throw error
+      }
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error reading courses: " + error.message });
+      next(error);
     }
   };
-
   readOne = async (req, res, next) => {
     try {
       const { id } = req.params;
       const response = await this.controller.readOne(id);
-      if (!response) {
-        return res.status(404).json({ message: "Course not found" });
-      }
-      res.json({
+      return res.json({
         statusCode: 200,
         response,
       });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error finding course: " + error.message });
+      next(error);
     }
   };
 
@@ -56,18 +64,14 @@ class CourseController {
     try {
       const { id } = req.params;
       const data = req.body;
-      const response = await this.controller.update(id, data, { new: true });
-      if (!response) {
-        return res.status(404).json({ message: "Course not found for update" });
-      }
-      res.json({
+      const opts = { new: true };
+      const response = await this.controller.update(id, data, opts);
+      return res.json({
         statusCode: 200,
         response,
       });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error updating course: " + error.message });
+      next(error);
     }
   };
 
@@ -75,22 +79,14 @@ class CourseController {
     try {
       const { id } = req.params;
       const response = await this.controller.delete(id);
-      if (!response) {
-        return res
-          .status(404)
-          .json({ message: "Course not found for deletion" });
-      }
-      res.json({
-        statusCode: 200,
-        message: "Course deleted successfully",
+      return res.json({
+        statusCode: (response ? 200 : 404),
+        response: response || "not found document" 
       });
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error deleting course: " + error.message });
+      next(error);
     }
   };
-
   // Controladores de content
 
   // Agregar contenido a un curso
