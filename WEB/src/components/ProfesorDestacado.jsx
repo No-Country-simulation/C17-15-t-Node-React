@@ -15,12 +15,12 @@ function ProfesorDestacado({ name, phrase, img, whatsnumber, tool, whytool }) {
         <div className="info">
           <div className="whatsapp ">
             <FaWhatsapp className="icon" />
-            <h4>Whatsapp</h4>
+            <h4 className="text-3xl font-bold text-center">Whatsapp</h4>
             <p>{whatsnumber}</p>
           </div>
           <div className="tool">
             <MdLabelOutline className="icon" />
-            <h4>{tool}</h4>
+            <h4 className="text-3xl font-bold text-center">{tool}</h4>
             <p>{whytool}</p>
           </div>
         </div>
