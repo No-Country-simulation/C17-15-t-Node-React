@@ -27,12 +27,12 @@ export const AboutComponent = () => {
               </Typography>
             </div>
             <div>
-              <img src="public/VisionA.png" alt="Mision" />
+              <img src="/VisionA.png" alt="Mision" />
             </div>
           </div>
           <div>
             <div>
-              <img src="public/MisionA.png" alt="Mision" />
+              <img src="/MisionA.png" alt="Mision" />
             </div>
             <div>
               <Typography variant="h4">Visión</Typography>
