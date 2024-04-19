@@ -1,9 +1,9 @@
 import "../App.css";
 
-import { Testimonial } from "../components/Testimonial";
+import { Testimonial } from "../components/Testimonials/Testimonial";
 import MenuTutorias from "../components/MenuTutorias";
 import ProfesorDestacado from "../components/ProfesorDestacado";
-import { Banner } from "../components/Banner";
+import { Banner } from "../components/Banner/Banner";
 
 export default function Home() {
   const profesorDatos = {
@@ -18,6 +18,7 @@ export default function Home() {
   return (
     <>
       <Banner />
+
       <ProfesorDestacado
         name={profesorDatos.name}
         phrase={profesorDatos.phrase}
@@ -26,6 +27,7 @@ export default function Home() {
         tool={profesorDatos.tool}
         whytool={profesorDatos.whytool}
       />
+   
       ,{/*<MenuTutorias></MenuTutorias>*/}
       <Testimonial />
     </>
