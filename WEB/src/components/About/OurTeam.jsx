@@ -52,7 +52,7 @@ const teamData = [
     "id": "8",
     "name": "Yesica Blanco",
     "occupation": "Front-end",
-    "image": "fotoYesica.jpg" 
+    "image": "https://picsum.photos/200/300?image=1027" 
   },
   {
     "id": "9",
