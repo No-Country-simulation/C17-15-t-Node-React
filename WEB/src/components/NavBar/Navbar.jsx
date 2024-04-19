@@ -33,11 +33,7 @@ export const NavBar = () => {
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 font-normal text-xl">
       {links.map((link, index) => (
         <li key={index}>
-          <NavLink
-            to={link.to}
-          >
-            {link.label}
-          </NavLink>
+          <NavLink to={link.to}>{link.label}</NavLink>
         </li>
       ))}
     </ul>
@@ -49,7 +45,7 @@ export const NavBar = () => {
         <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-gradient-to-br from-primary to-secondary">
           <div className="flex items-center justify-between text-white">
             <Typography
-            variant="h2"
+              variant="h2"
               as="a"
               href="/"
               className="mr-4 cursor-pointer py-1.5 font-bold"
@@ -114,8 +110,6 @@ export const NavBar = () => {
           </MobileNav>
         </Navbar>
       </div>
-
-
     </>
   );
 };
