@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -23,13 +24,13 @@ export default function SeacrhCourses() {
           throw new Error("Error al obtener los cursos");
         }
         const responseData = await response.json();
-        console.log(responseData.response.docs);// console.log(responseData.response.docs);
+        console.log(responseData.response.docs); // console.log(responseData.response.docs);
         let coursesData = [];
 
         // Verificar el formato de la respuesta
         if (
           responseData.statusCode === 200 &&
-          Array.isArray(responseData.response.docs)// Array.isArray(responseData.response.docs)
+          Array.isArray(responseData.response.docs) // Array.isArray(responseData.response.docs)
         ) {
           // Si la respuesta tiene statusCode 200 y contiene un array de cursos
           coursesData = responseData.response.docs; //          coursesData = responseData.response.docs;
@@ -89,17 +90,21 @@ export default function SeacrhCourses() {
         {courses.map((course) => (
           <Card key={course._id} className="mt-6 w-96 bg-gray-50">
             <CardHeader color="blue-gray" className="relative h-56  ">
-              <img
-                src={course.thumbnail}
-                alt="card-image"
-                className="object-cover w-full h-full"
-              />
+              <Link to={`/course/${course._id}`}>
+                <img
+                  src={course.thumbnail}
+                  alt="card-image"
+                  className="object-cover w-full h-full"
+                />
+              </Link>
             </CardHeader>
             <CardBody className="h-[200px] flex flex-col pb-1">
               <div className="flex justify-between items-center">
-                <Typography variant="h3" className="w-[280px]">
-                  {course.title}
-                </Typography>
+                <Link to={`/course/${course._id}`}>
+                  <Typography variant="h3" className="w-[280px]">
+                    {course.title}
+                  </Typography>
+                </Link>
                 <div className="mb-3 flex items-center justify-between">
                   <Typography
                     color="blue-gray"
@@ -135,7 +140,10 @@ export default function SeacrhCourses() {
               <Typography className="text-xl font-bold">
                 {`$ ${course.price}`}
               </Typography>
-              <Button size="sm" className="bg-gradient-to-tr from-primary to-secondary">
+              <Button
+                size="sm"
+                className="bg-gradient-to-tr from-primary to-secondary"
+              >
                 Comprar
               </Button>
             </CardFooter>
