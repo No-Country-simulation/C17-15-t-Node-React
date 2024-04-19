@@ -24,14 +24,14 @@ export function Footer() {
       <div className="mx-auto w-full px-8 bg-gradient-to-br from-primary to-secondary">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2 pt-12">
           <div>
-            <Typography variant="h2" color="white" className="mb-16">
+            <Typography variant="h2" color="white" className="mb-16 sm:text-start text-center">
               MasterAula
             </Typography>
-            <Typography color="white" className="mb-6">
+            <Typography color="white" className="mb-6 sm:text-start text-center">
               Siguenos en nuestras redes.
             </Typography>
             <div>
-              <div className="flex gap-7 text-blue-gray-900">
+              <div className="flex gap-7 text-blue-gray-900 sm:justify-start justify-center">
                 <Typography
                   as="a"
                   href="#"
@@ -85,13 +85,13 @@ export function Footer() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-3 md:justify-between md:gap-9 pt-12">
+          <div className="grid grid-cols-2 justify-between justify-items-center gap-4 md:grid-cols-3 md:justify-between md:gap-9 pt-12">
             {LINKS.map(({ title, items }) => (
               <ul key={title}>
                 <Typography
                   variant="h5"
                   color="white"
-                  className="mb-3 font-bold "
+                  className="mb-3 font-bold text-center sm:text-start"
                 >
                   {title}
                 </Typography>
@@ -101,7 +101,7 @@ export function Footer() {
                       as="a"
                       href="#"
                       color="white"
-                      className="py-2 font-normal transition-colors hover:font-bold"
+                      className="py-2 text-center sm:text-start font-normal transition-colors hover:font-bold"
                     >
                       {link}
                     </Typography>

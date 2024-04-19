@@ -13,7 +13,7 @@ import { LogInNavBar} from "./LogInNavBar";
 
 export const NavBar = () => {
   const links = [
-    { to: "/", label: "/Inicio" },
+    { to: "/", label: "" },
     { to: "/about", label: "Sobre Nosotros" },
     { to: "/courses", label: "Cursos" },
     { to: "/services", label: "Servicios" },

@@ -28,7 +28,7 @@ export default function Home() {
         whytool={profesorDatos.whytool}
       />
    
-      ,{/*<MenuTutorias></MenuTutorias>*/}
+      <MenuTutorias></MenuTutorias>
       <Testimonial />
     </>
   );

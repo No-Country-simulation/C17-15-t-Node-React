@@ -60,7 +60,7 @@ const MenuTutorias = () => {
               }`}
               onClick={() => handleSectionChange('ediciondevideo')}
             >
-              Edición de video
+              Video
             </button>
           </li>
           <li className="mr-1">
