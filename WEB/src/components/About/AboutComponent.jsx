@@ -5,18 +5,18 @@ export const AboutComponent = () => {
   return (
     <div className="flex flex-col m-auto w-[90%] justify-center items-center">
       <div>
-        <div className="text-6xl font-extrabold mb-8 mt-[100px] text-center">
+        <div className="text-4xl font-extrabold mb-8 mt-[100px] text-center sm:text-6xl">
           <span className="bg-clip-text text-transparent text-center bg-gradient-to-br from-primary to-secondary">
             Sobre Nosotros
           </span>
         </div>
-        <Typography variant="h3" className="text-center">
+        <Typography variant="h3" className="text-center text-xl sm:text-3xl">
           Más que cursos, una experiencia de aprendizaje
         </Typography>
-        <div className="flex w-[70%] items-center m-auto gap-6 py-12">
+        <div className="flex flex-wrap w-[90%] text-center items-center m-auto gap-6 py-12 sm:flex sm:flex-nowrap sm:w-[70%] sm:text-start">
           <div className="flex flex-col gap-5">
             <div>
-              <Typography variant="h4">Misión</Typography>
+              <Typography variant="h4" className="text-center sm:text-start">Misión</Typography>
               <Typography variant="h5" className="font-light">
                 En MasterAula, estamos apasionados por hacer que la educación
                 sea accesible y efectiva para todos. Creemos que el conocimiento
@@ -50,7 +50,7 @@ export const AboutComponent = () => {
         <div className="w-[80%] mt-10"></div>
         <Typography
           variant="h3"
-          className="text-center w-[80%] m-auto my-12 font-normal"
+          className="text-center text-2xl font-semibold w-[80%] m-auto my-12 sm:font-semibold sm:text-4xl"
         >
           En MasterAula, creemos que todos tienen el potencial de aprender y
           crecer. Estamos aquí para brindarle las herramientas y el apoyo que

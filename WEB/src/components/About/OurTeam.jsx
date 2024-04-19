@@ -2,80 +2,107 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Typography,
-  Tooltip,
 } from "@material-tailwind/react";
+
+const teamData = [
+  {
+    "id": "1",
+    "name": "Vero Eschenmoser",
+    "occupation": "Team Leader",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "2",
+    "name": "Facundo Medina",
+    "occupation": "Back-end",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "3",
+    "name": "Agustin Barrera",
+    "occupation": "Back-end",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "4",
+    "name": "Santiago Moreno",
+    "occupation": "Tester",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "5",
+    "name": "Juan Pintos",
+    "occupation": "Back-end",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "6",
+    "name": "Santiago Acuña",
+    "occupation": "Back-end",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "7",
+    "name": "Emanuel Enriquez",
+    "occupation": "Front-end",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "8",
+    "name": "Yesica Blanco",
+    "occupation": "Front-end",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "9",
+    "name": "Adrian Isaac ",
+    "occupation": "Front-end",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+  {
+    "id": "10",
+    "name": "Josue Figueroa",
+    "occupation": "Front-end",
+    "image": "https://picsum.photos/200/300?image=1027" 
+  },
+];
 
 
 export const OurTeam = () => {
   return (
     <div>
       <div>
-        <div className="text-6xl font-extrabold mb-8 mt-[100px] text-center">
+        <div className="text-4xl font-extrabold mb-8 mt-[100px] text-center sm:text-6xl">
           <span className="bg-clip-text text-transparent text-center bg-gradient-to-br from-primary to-secondary">
             Nuestro Equipo
           </span>
         </div>
-        <Typography variant="h3" className="text-center">
+        <Typography variant="h3" className="text-center text-2xl sm:text-3xl">
           Más que cursos, una experiencia de aprendizaje
         </Typography>
       </div>
 
-      <h1>fotos</h1>
-
-      <div>
-        <Card className="w-96">
-          <CardHeader floated={false} className="h-80">
+      <div className="flex flex-wrap gap-4 justify-center m-auto w-[60%] my-10  sm:w-[90%]">
+        {teamData.map((person) =>(
+          
+        <Card key={person.id} className="w-80 bg-gray-100">
+          <CardHeader floated={false} className="h-50 sm:h-80 ">
             <img
-              src="https://docs.material-tailwind.com/img/team-3.jpg"
+              src={person.image}
               alt="profile-picture"
             />
           </CardHeader>
           <CardBody className="text-center">
-            <Typography variant="h4" color="blue-gray" className="mb-2">
-              Natalie Paisley
+            <Typography variant="h4" color="blue-gray" className="text-md my-1 sm:my-1 sm:text-2xl">
+              {person.name}
             </Typography>
-            <Typography color="blue-gray" className="font-medium" textGradient>
-              CEO / Co-Founder
+            <Typography color="blue-gray" className="font-medium my-1 sm:my-1" textGradient>
+              {person.occupation}
             </Typography>
           </CardBody>
-          <CardFooter className="flex justify-center gap-7 pt-2">
-            <Tooltip content="Like">
-              <Typography
-                as="a"
-                href="#facebook"
-                variant="lead"
-                color="blue"
-                textGradient
-              >
-                <i className="fab fa-facebook" />
-              </Typography>
-            </Tooltip>
-            <Tooltip content="Follow">
-              <Typography
-                as="a"
-                href="#twitter"
-                variant="lead"
-                color="light-blue"
-                textGradient
-              >
-                <i className="fab fa-twitter" />
-              </Typography>
-            </Tooltip>
-            <Tooltip content="Follow">
-              <Typography
-                as="a"
-                href="#instagram"
-                variant="lead"
-                color="purple"
-                textGradient
-              >
-                <i className="fab fa-instagram" />
-              </Typography>
-            </Tooltip>
-          </CardFooter>
         </Card>
+        ))}
       </div>
     </div>
   );
