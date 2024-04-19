@@ -12,7 +12,7 @@ import { ButtonLogInNavBar } from "./ButtonLogInNavBar";
 
 export const NavBar = () => {
   const links = [
-    { to: "/", label: "Home" },
+    { to: "/", label: "" },
     { to: "/about", label: "About" },
     { to: "/courses", label: "Courses" },
     { to: "/services", label: "Services" },
