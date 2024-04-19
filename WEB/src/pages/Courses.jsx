@@ -1,10 +1,10 @@
 import React from "react";
-import SeacrhCourses from "../components/SearchCourses/SeacrhCourses";
+import SearchCourses from "../components/SearchCourses/SearchCourses";
 
 export const Courses = () => {
   return (
     <div>
-      <SeacrhCourses />
+      <SearchCourses />
     </div>
   );
 };

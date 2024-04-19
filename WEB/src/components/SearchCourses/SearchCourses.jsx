@@ -17,7 +17,7 @@ export default function SeacrhCourses() {
     const fetchCourses = async () => {
       try {
         const response = await fetch(
-          "https://c17-15-t-node-react.onrender.com/api/courses"
+          "https://c17-15-t-node-react.onrender.com/api/courses?limit=5"
         );
         if (!response.ok) {
           throw new Error("Error al obtener los cursos");

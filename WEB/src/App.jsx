@@ -10,22 +10,25 @@ import { Footer } from "./components/Footer/Footer";
 import { Courses } from "./pages/Courses";
 import { Profile } from "./pages/Profile";
 import { CourseDetailContainer } from "./components/courseDetail/CourseDetailContainer";
+
 const App = () => {
   return (
-    <Router>
-      <NavBar /> {/* Render Navbar before Routes */}
-      <Routes>
-        <Route path="/" element={<Home />} />{" "}
-        {/* Descomenta y establece la ruta a "/" */}
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/course/:cid" element={<CourseDetailContainer />}/>
-      </Routes>
-      <Footer /> {/* Render Footer after Routes */}
-    </Router>
+
+      <Router>
+        <NavBar /> {/* Render Navbar before Routes */}
+        <Routes>
+          <Route path="/" element={<Home />} />{" "}
+          {/* Descomenta y establece la ruta a "/" */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/course/:cid" element={<CourseDetailContainer />} />
+        </Routes>
+        <Footer /> {/* Render Footer after Routes */}
+      </Router>
+
   );
 };
 
