@@ -4,17 +4,17 @@ export function Banner() {
   return (
     <Carousel className="">
       <img
-        src= "./src/assets/MasterAula-slogan.png"
+        src= "public/MasterAula-slogan.png"
         alt="image 1"
         className="h-full w-full object-cover"
       />
       <img
-        src="./src/assets/BannerOfertaFigma.png"
+        src="public/BannerOfertaFigma.png"
         alt="image 2"
         className="h-full w-full object-cover"
       />
       <img
-        src="./src/assets/BannerWebDescuentos.png"
+        src="public/BannerWebDescuentos.png"
         alt="image 3"
         className="h-full w-full object-cover"
       />
