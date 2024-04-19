@@ -18,6 +18,7 @@ export default function Home() {
   return (
     <>
       <Banner />
+
       <ProfesorDestacado
         name={profesorDatos.name}
         phrase={profesorDatos.phrase}
@@ -26,6 +27,7 @@ export default function Home() {
         tool={profesorDatos.tool}
         whytool={profesorDatos.whytool}
       />
+   
       ,{/*<MenuTutorias></MenuTutorias>*/}
       <Testimonial />
     </>

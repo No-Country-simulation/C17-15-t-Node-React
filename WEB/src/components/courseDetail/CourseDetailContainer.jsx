@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { CourseDetail } from "../CourseDetail/CourseDetail.jsx";
+import { CourseDetail } from "./CourseDetail.jsx";
 
 export const CourseDetailContainer = () => {
   const [courseInfo, setCourseInfo] = useState();

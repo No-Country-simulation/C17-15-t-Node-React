@@ -9,7 +9,7 @@ import { NavBar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Courses } from "./pages/Courses";
 import { Profile } from "./pages/Profile";
-import { CourseDetailContainer } from "./components/CourseDetailContainer/CourseDetailContainer";
+import { CourseDetailContainer } from "./components/courseDetail/CourseDetailContainer";
 const App = () => {
   return (
     <Router>

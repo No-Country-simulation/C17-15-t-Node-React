@@ -75,17 +75,17 @@ export default function SeacrhCourses() {
         <Typography variant="h3" className="text-center">
           Más que cursos, una experiencia de aprendizaje
         </Typography>
-        <div className="mt-8 borde-2 border-gray-600 w-[900px]">
+        <div className="m-8 p-4 items-center borde-2 border-gray-600 w-full">
           <input
             type="text"
             value={searchTerm}
             onChange={handleSearch}
             placeholder="Buscar cursos"
-            className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none shadow-md p-4"
+            className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:outline-none shadow-md p-4 lg:w-full"
           />
         </div>
       </div>
-      <div className="flex flex-wrap gap-10 p-10 mx-[170px] ">
+      <div className="flex justify-center flex-wrap gap-10 pb-10 pl-10 pr-10 ml-10 mr-10 ">
         {courses.map((course) => (
           <Card key={course._id} className="mt-6 w-96 bg-gray-50">
             <CardHeader color="blue-gray" className="relative h-56  ">

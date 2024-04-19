@@ -7,17 +7,18 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { ButtonRegistrateNavBar } from "./ButtonRegistrateNavBar";
-import { ButtonLogInNavBar } from "./ButtonLogInNavBar";
+import { ButtonNavBar } from "./ButtonNavBar";
+import { RegistrateNavBar } from "./RegistrateNavBar";
+import { LogInNavBar } from "./LogInNavBar";
 
 export const NavBar = () => {
   const links = [
-    { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
-    { to: "/courses", label: "Courses" },
-    { to: "/services", label: "Services" },
-    { to: "/contact", label: "Contact" },
-    { to: "/profile", label: "Profile" },
+    { to: "/", label: "Inicio" },
+    { to: "/about", label: "Sobre Nosotros" },
+    { to: "/courses", label: "Cursos" },
+    { to: "/services", label: "Servicios" },
+    { to: "/contact", label: "Contacto" },
+
   ];
 
   const [openNav, setOpenNav] = React.useState(false);
@@ -30,7 +31,7 @@ export const NavBar = () => {
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 font-normal text-xl">
+    <ul className="mt-2 mb-4 flex flex-col gap-2 text-sm lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 font-normal lg:text-lg xl:text-xl">
       {links.map((link, index) => (
         <li key={index}>
           <NavLink
@@ -48,19 +49,35 @@ export const NavBar = () => {
       <div className="">
         <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-gradient-to-br from-primary to-secondary">
           <div className="flex items-center justify-between text-white">
+          {/* div para centrar Master aula en version movil */}
+            <div className="lg:hidden"></div> 
             <Typography
-            variant="h2"
+              variant="h2"
               as="a"
               href="/"
-              className="mr-4 cursor-pointer py-1.5 font-bold"
+              className=" cursor-pointer  font-bold lg:mr-4 lg:py-1.5" 
             >
               MasterAula
             </Typography>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
-              <div className="flex items-center gap-x-4">
-                <ButtonRegistrateNavBar />
-                <ButtonLogInNavBar />
+              {/* pantalla tamaño hasta lg */}
+              <div className="items-center gap-x-4 hidden lg:flex 2xl:hidden">
+                <ButtonNavBar buttonText="Regístrate"
+                  dialogContent={<RegistrateNavBar />}
+                  size="md" />
+                <ButtonNavBar buttonText="Inicia Sesión"
+                  dialogContent={<LogInNavBar />}
+                  size="md" />
+              </div>
+               {/* pantalla tamaño despues de 2xl */}
+               <div className="items-center gap-x-4 hidden 2xl:flex">
+                <ButtonNavBar buttonText="Regístrate"
+                  dialogContent={<RegistrateNavBar />}
+                  size="lg" />
+                <ButtonNavBar buttonText="Inicia Sesión"
+                  dialogContent={<LogInNavBar />}
+                  size="lg" />
               </div>
               <IconButton
                 variant="text"
@@ -105,10 +122,10 @@ export const NavBar = () => {
             {navList}
             <div className="flex items-center gap-x-1">
               <Button fullWidth variant="text" size="sm" className="">
-                <span>Log In</span>
+                <span>Inicia Sesión</span>
               </Button>
               <Button fullWidth variant="gradient" size="sm" className="">
-                <span>Sign in</span>
+                <span>Registrate</span>
               </Button>
             </div>
           </MobileNav>
