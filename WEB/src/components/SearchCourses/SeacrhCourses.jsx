@@ -67,12 +67,12 @@ export default function SeacrhCourses() {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center items-center">
-        <div className="text-6xl font-extrabold mb-8 mt-[100px]">
-          <span className="bg-clip-text text-transparent text-center bg-gradient-to-br from-primary to-secondary">
+        <div className="text-4xl font-extrabold mb-8 mt-[100px] sm:text-6xl">
+          <span className=" bg-clip-text text-transparent text-center bg-gradient-to-br from-primary to-secondary">
             Cursos Online
           </span>
         </div>
-        <Typography variant="h3" className="text-center">
+        <Typography variant="h3" className="text-center text-xl sm:text-3xl">
           Más que cursos, una experiencia de aprendizaje
         </Typography>
         <div className="m-8 p-4 items-center borde-2 border-gray-600 w-full">
@@ -135,7 +135,7 @@ export default function SeacrhCourses() {
               <Typography className="text-xl font-bold">
                 {`$ ${course.price}`}
               </Typography>
-              <Button className="bg-gradient-to-tr from-primary to-secondary text-md">
+              <Button size="sm" className="bg-gradient-to-tr from-primary to-secondary">
                 Comprar
               </Button>
             </CardFooter>
