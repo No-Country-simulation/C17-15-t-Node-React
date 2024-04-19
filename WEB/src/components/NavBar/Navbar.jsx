@@ -13,11 +13,11 @@ import { ButtonLogInNavBar } from "./ButtonLogInNavBar";
 export const NavBar = () => {
   const links = [
     { to: "/", label: "" },
-    { to: "/about", label: "About" },
-    { to: "/courses", label: "Courses" },
-    { to: "/services", label: "Services" },
-    { to: "/contact", label: "Contact" },
-    { to: "/profile", label: "Profile" },
+    { to: "/about", label: "Sobre nosotros" },
+    { to: "/courses", label: "Cursos" },
+    { to: "/services", label: "Servicios" },
+    { to: "/contact", label: "Contactanos" },
+    { to: "/profile", label: "Perfil" },
   ];
 
   const [openNav, setOpenNav] = React.useState(false);
