@@ -5,8 +5,8 @@ import Home from "./pages/Home"; // Assuming Home is imported
 import Contact from "./pages/Contact";
 import { About } from "./pages/About";
 import { Services } from "./pages/Services";
-import { NavBar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
+import { NavBar } from "./components/NavBar/Navbar";
+import { Footer } from "./components/Footer/Footer";
 import { Courses } from "./pages/Courses";
 import { Profile } from "./pages/Profile";
 import { CourseDetailContainer } from "./components/courseDetail/CourseDetailContainer";
