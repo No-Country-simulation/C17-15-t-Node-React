@@ -4,7 +4,7 @@ import BookingCard from "./BookingCard"
 export default function MenuCardSectionDiseño() {
     return (
         <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-2 justify-items-center">
                 <BookingCard
                     imagen="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     title="Next JS"
