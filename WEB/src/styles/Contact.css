@@ -1,0 +1,30 @@
+.contact-main {
+  width: 100%;
+  margin: 100px 0;
+  display: flex;
+  justify-content: center;
+}
+.flex-contact {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
+.content {
+  width: 500px;
+}
+.placeholder-show::placeholder {
+  opacity: 1 !important;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+}
+@media screen and (max-width: 767px) {
+  .logo {
+    margin: 100px 0;
+    width: 70%;
+  }
+}
