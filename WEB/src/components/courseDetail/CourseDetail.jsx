@@ -1,10 +1,10 @@
-import { Typography } from "@material-tailwind/react";
+import { Spinner,Typography } from "@material-tailwind/react";
 
 /* eslint-disable react/prop-types */
 export const CourseDetail = ({ courseInfo }) => {
   if (!courseInfo) {
     return (
-      <h2>Loading...</h2> //aquí iría un componente personalizado de carga
+      <Spinner /> //aquí iría un componente personalizado de carga
     );
   } else {
     const { title, tutor_id, description, price, level, thumbnail, duration } =

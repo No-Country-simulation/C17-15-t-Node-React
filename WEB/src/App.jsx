@@ -9,6 +9,7 @@ import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
 import { Courses } from "./pages/Courses";
 import { Profile } from "./pages/Profile";
+import TutorComponent from './components/PerfilTutor/TutorComponent';
 import { CourseDetailContainer } from "./components/courseDetail/CourseDetailContainer";
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/courses" element={<Courses />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/course/:cid" element={<CourseDetailContainer />}/>
+        <Route path="/tutor/:tutorId" element={<TutorComponent />} />
       </Routes>
       <Footer /> {/* Render Footer after Routes */}
     </Router>
