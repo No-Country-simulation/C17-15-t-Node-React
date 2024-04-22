@@ -8,10 +8,14 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-
+import { motion } from "framer-motion";
 export default function Contact() {
   return (
-    <main className="contact-main">
+    <motion.main
+    initial={{opacity:0}}
+    animate={{opacity: 1}}
+      className="contact-main"
+    >
       <div className="flex-contact ">
         <div className="content">
           <div className="title mb-8">
@@ -115,6 +119,6 @@ export default function Contact() {
           </h1>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }
