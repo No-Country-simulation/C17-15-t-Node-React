@@ -9,12 +9,15 @@ import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
 import { Courses } from "./pages/Courses";
 import { Profile } from "./pages/Profile";
-import TutorComponent from './components/PerfilTutor/TutorComponent';
+import { AnimatePresence } from "framer-motion";
+
+//import TutorComponent from './components/PerfilTutor/TutorComponent';
 import { CourseDetailContainer } from "./components/courseDetail/CourseDetailContainer";
 const App = () => {
   return (
     <Router>
       <NavBar /> {/* Render Navbar before Routes */}
+      <AnimatePresence mode="wait">
       <Routes>
         <Route path="/" element={<Home />} />{" "}
         {/* Descomenta y establece la ruta a "/" */}
@@ -25,6 +28,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/course/:cid" element={<CourseDetailContainer />}/>
       </Routes>
+      </AnimatePresence>
       <Footer /> {/* Render Footer after Routes */}
     </Router>
   );
