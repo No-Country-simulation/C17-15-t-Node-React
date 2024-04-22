@@ -24,7 +24,6 @@ const App = () => {
         <Route path="/courses" element={<Courses />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/course/:cid" element={<CourseDetailContainer />}/>
-        <Route path="/tutor/:tutorId" element={<TutorComponent />} />
       </Routes>
       <Footer /> {/* Render Footer after Routes */}
     </Router>
