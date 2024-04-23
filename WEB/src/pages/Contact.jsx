@@ -113,7 +113,7 @@ export default function Contact() {
           </div>
         </div>
         <div className="logo">
-          <img src="public\LogoMasterAula.png" alt="" />
+          <img src="public/LogoMasterAula.png" alt="" />
           <h1 className="mt-2 text-blue-gray-900 font-semibold leading-tight">
             Mas que cursos, una experiencia de aprendizaje
           </h1>
