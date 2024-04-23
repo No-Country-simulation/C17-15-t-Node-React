@@ -68,6 +68,7 @@ export function LogInSignUp({ signInit, onChangeSignIn }) {
             label="Contraseña"
             type="password"
             size="lg"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPass(e.target.value)} 
           />
