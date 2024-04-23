@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { ButtonNavBar } from "./ButtonNavBar";
 import { LogInSignUp } from "./LogInSignUp";
-import { SignProvider } from "../../context/signContext";
+import { SignProvider } from "../../context/signProvider";
 
 
 export const NavBar = () => {
@@ -23,8 +23,6 @@ export const NavBar = () => {
   ];
 
   const [openNav, setOpenNav] = React.useState(false);
- 
-
 
   React.useEffect(() => {
     window.addEventListener(
@@ -126,10 +124,10 @@ export const NavBar = () => {
             <div className="flex items-center gap-x-1">
             <ButtonNavBar buttonText="Regístrate"
                   
-                  dialogContent={<LogInSignUp />}
+                  dialogContent={<LogInSignUp signInit={false} />}
                   size="xl" />
                 <ButtonNavBar buttonText="Inicia Sesión"
-                  dialogContent={<LogInSignUp/>}
+                  dialogContent={<LogInSignUp signInit={true}/>}
                   size="xl" />
             </div>
           </MobileNav>
