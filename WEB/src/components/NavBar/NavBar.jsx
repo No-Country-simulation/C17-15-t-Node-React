@@ -8,8 +8,9 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { ButtonNavBar } from "./ButtonNavBar";
-import { RegistrateNavBar } from "./RegistrateNavBar";
-import { LogInNavBar} from "./LogInNavBar";
+import { LogInSignUp } from "./LogInSignUp";
+import { SignProvider } from "../../context/signContext";
+
 
 export const NavBar = () => {
   const links = [
@@ -22,6 +23,8 @@ export const NavBar = () => {
   ];
 
   const [openNav, setOpenNav] = React.useState(false);
+ 
+
 
   React.useEffect(() => {
     window.addEventListener(
@@ -45,7 +48,7 @@ export const NavBar = () => {
   );
 
   return (
-    <>
+    <SignProvider>
       <div className="">
         <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-gradient-to-br from-primary to-secondary">
           <div className="flex items-center justify-between text-white">
@@ -64,19 +67,19 @@ export const NavBar = () => {
               {/* pantalla tamaño hasta lg */}
               <div className="items-center gap-x-4 hidden lg:flex 2xl:hidden">
                 <ButtonNavBar buttonText="Regístrate"
-                  dialogContent={<RegistrateNavBar />}
+                  dialogContent={<LogInSignUp signInit={false}/>}
                   size="md" />
                 <ButtonNavBar buttonText="Inicia Sesión"
-                  dialogContent={<LogInNavBar />}
-                  size="md" />
+                  dialogContent={<LogInSignUp signInit={true}/>}
+                  size="md"/>
               </div>
                {/* pantalla tamaño despues de 2xl */}
                <div className="items-center gap-x-4 hidden 2xl:flex">
                 <ButtonNavBar buttonText="Regístrate"
-                  dialogContent={<RegistrateNavBar />}
-                  size="lg" />
+                  dialogContent={<LogInSignUp signInit={false}/>}
+                  size="lg"  />
                 <ButtonNavBar buttonText="Inicia Sesión"
-                  dialogContent={<LogInNavBar />}
+                  dialogContent={<LogInSignUp signInit={true} />}
                   size="lg" />
               </div>
               <IconButton
@@ -121,18 +124,19 @@ export const NavBar = () => {
           <MobileNav open={openNav}>
             {navList}
             <div className="flex items-center gap-x-1">
-              <Button fullWidth variant="text" size="sm" className="">
-                <span>Inicia Sesión</span>
-              </Button>
-              <Button fullWidth variant="gradient" size="sm" className="">
-                <span>Registrate</span>
-              </Button>
+            <ButtonNavBar buttonText="Regístrate"
+                  
+                  dialogContent={<LogInSignUp />}
+                  size="xl" />
+                <ButtonNavBar buttonText="Inicia Sesión"
+                  dialogContent={<LogInSignUp/>}
+                  size="xl" />
             </div>
           </MobileNav>
         </Navbar>
       </div>
 
 
-    </>
+    </SignProvider>
   );
 };
