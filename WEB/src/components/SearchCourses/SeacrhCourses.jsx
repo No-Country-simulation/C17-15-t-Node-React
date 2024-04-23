@@ -179,11 +179,11 @@ export default function SeacrhCourses() {
         <Items currentItems={currentItems} />
         <ReactPaginate
           breakLabel="..."
-          nextLabel={<><span className="mr-1">Next</span><FaArrowRight/></>}
+          nextLabel={<><span className="mr-1">Siguiente</span><FaArrowRight/></>}
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
           pageCount={pageCount}
-          previousLabel={<><FaArrowLeft/><span className="ml-1">Previous</span></>}
+          previousLabel={<><FaArrowLeft/><span className="ml-1">Anterior</span></>}
           renderOnZeroPageCount={null}
           className="flex justify-center items-center gap-4 mb-8"
           activeLinkClassName="bg-blue-500  !text-black "

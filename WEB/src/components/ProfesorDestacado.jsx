@@ -6,14 +6,15 @@ function ProfesorDestacado({ name, phrase, img, whatsnumber, tool, whytool }) {
   return (
     // quise mejorar el responsive pero no pude
     <div className="profesorDestacado shadow-md border border-gray-300 p-6 rounded-xl   lg:flex lg:items-center lg:p-8 font-sans">
-      <div className="header  ">
-        <h1 className="text-3xl font-bold  mb-4">{name}</h1>
-        <h6 className="text-xl  mb-2">{phrase}</h6>
-      </div>
+
       <div className="content">
         <img className="profImg .shadow-lg rounded-xl " src={img} alt="" />
         <div className="info">
-          <div className="whatsapp ">
+          <div className="header mx-auto">
+            <h1 className="text-3xl font-bold mb-4">{name}</h1>
+            <h6 className="text-xl mb-2">{phrase}</h6>
+          </div>
+          <div className="whatsapp mb-4">
             <FaWhatsapp className="icon" />
             <h4 className="text-3xl font-bold text-center">Whatsapp</h4>
             <p>{whatsnumber}</p>
@@ -23,6 +24,7 @@ function ProfesorDestacado({ name, phrase, img, whatsnumber, tool, whytool }) {
             <h4 className="text-3xl font-bold text-center">{tool}</h4>
             <p>{whytool}</p>
           </div>
+
         </div>
       </div>
     </div>
