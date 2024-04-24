@@ -1,5 +1,4 @@
 import "./App.css";
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home"; // Assuming Home is imported
 import Contact from "./pages/Contact";
@@ -10,8 +9,6 @@ import { Footer } from "./components/Footer/Footer";
 import { Courses } from "./pages/Courses";
 import { Profile } from "./pages/Profile";
 import { AnimatePresence } from "framer-motion";
-
-//import TutorComponent from './components/PerfilTutor/TutorComponent';
 import { CourseDetailContainer } from "./components/courseDetail/CourseDetailContainer";
 import { UserProvider } from "./context/userProvider";
 const App = () => {

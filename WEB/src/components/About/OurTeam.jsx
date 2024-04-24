@@ -16,7 +16,7 @@ const teamData = [
     "id": "2",
     "name": "Facundo Medina",
     "occupation": "Back-end",
-    "image": "https://picsum.photos/200/300?image=1027" 
+    "image": "fotoFacu.jpeg" 
   },
   {
     "id": "3",
@@ -28,13 +28,13 @@ const teamData = [
     "id": "4",
     "name": "Santiago Moreno",
     "occupation": "Tester",
-    "image": "https://picsum.photos/200/300?image=1027" 
+    "image": "SantiMoreno.jpeg" 
   },
   {
     "id": "5",
     "name": "Juan Pintos",
     "occupation": "Back-end",
-    "image": "https://picsum.photos/200/300?image=1027" 
+    "image": "JuanPintos.jpeg" 
   },
   {
     "id": "6",
@@ -46,13 +46,13 @@ const teamData = [
     "id": "7",
     "name": "Emanuel Enriquez",
     "occupation": "Front-end",
-    "image": "https://picsum.photos/200/300?image=1027" 
+    "image": "EmanuelEnriquez.jpeg" 
   },
   {
     "id": "8",
     "name": "Yesica Blanco",
     "occupation": "Front-end",
-    "image": "https://picsum.photos/200/300?image=1027" 
+    "image": "fotoYesica.jpg" 
   },
   {
     "id": "9",
@@ -91,6 +91,7 @@ export const OurTeam = () => {
             <img
               src={person.image}
               alt="profile-picture"
+              className="object-cover w-full h-full m-auto"
             />
           </CardHeader>
           <CardBody className="text-center">
