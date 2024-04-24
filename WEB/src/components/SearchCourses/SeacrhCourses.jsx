@@ -9,16 +9,17 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-
+import Loader from "/src/components/Loader"
 import ReactPaginate from "react-paginate";
-
+import {motion} from "framer-motion"
 export default function SeacrhCourses() {
   const [originalCourses, setOriginalCourses] = useState([]);
   const [courses, setCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchCourses = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch(
           "https://c17-15-t-node-react.onrender.com/api/courses"
@@ -29,6 +30,7 @@ export default function SeacrhCourses() {
         const responseData = await response.json();
         console.log(responseData.response.docs); // console.log(responseData.response.docs);
         let coursesData = [];
+        setIsLoading(false);
 
         // Verificar el formato de la respuesta
         if (
@@ -90,13 +92,13 @@ export default function SeacrhCourses() {
         </div>
       </div>
       <div>
-        <PaginatedItems itemsPerPage={4} />
+        {isLoading?<Loader/>:<PaginatedItems itemsPerPage={4} />}
       </div>
     </div>
   );
   function Items({ currentItems }) {
     return (
-      <div className="flex justify-center flex-wrap gap-10 pb-10 pl-10 pr-10 ml-10 mr-10  ">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center flex-wrap gap-10 pb-10 pl-10 pr-10 ml-10 mr-10  ">
         {currentItems &&
           currentItems.map((course) => (
             <Card key={course._id} className="mt-6 w-96 bg-gray-50">
@@ -160,7 +162,7 @@ export default function SeacrhCourses() {
               </CardFooter>
             </Card>
           ))}
-      </div>
+      </motion.div>
     );
   }
   function PaginatedItems({ itemsPerPage }) {
@@ -177,11 +179,11 @@ export default function SeacrhCourses() {
         <Items currentItems={currentItems} />
         <ReactPaginate
           breakLabel="..."
-          nextLabel={<><span className="mr-1">Next</span><FaArrowRight/></>}
+          nextLabel={<><span className="mr-1">Siguiente</span><FaArrowRight/></>}
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
           pageCount={pageCount}
-          previousLabel={<><FaArrowLeft/><span className="ml-1">Previous</span></>}
+          previousLabel={<><FaArrowLeft/><span className="ml-1">Anterior</span></>}
           renderOnZeroPageCount={null}
           className="flex justify-center items-center gap-4 mb-8"
           activeLinkClassName="bg-blue-500  !text-black "
