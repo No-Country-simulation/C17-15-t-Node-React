@@ -83,7 +83,7 @@ export default function Contact() {
                     }}
                   />
                   {/*asunto*/}
-                  <Textarea label="Message" />
+                  <Textarea label="Mensaje" />
                   {/*pais*/}
                   <div className="w-72">
                     <Select label="Elige tu pais">
@@ -113,7 +113,7 @@ export default function Contact() {
           </div>
         </div>
         <div className="logo">
-          <img src="public/LogoMasterAula.png" alt="" />
+          <img src="/LogoMasterAula.png" alt="" />
           <h1 className="mt-2 text-blue-gray-900 font-semibold leading-tight">
             Mas que cursos, una experiencia de aprendizaje
           </h1>
