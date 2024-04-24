@@ -20,6 +20,7 @@ class AuthController {
       return res.cookie("token", req.token).json({
         message: "logged In",
         statusCode: 200,
+        token: req.token
       });
     } catch (error) {
       next(error);
@@ -46,7 +47,19 @@ class AuthController {
       next(error);
     }
   };
+  me = async (req, res, next) => {
+    try {
+      const userData = req.user
+      return res.json({
+        statusCode: 200,
+        message: "Usuario autenticado",
+        userData
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 const controller = new AuthController();
-export const { register, badauth, signout, login } = controller;
+export const { register, badauth, signout, login, me } = controller;

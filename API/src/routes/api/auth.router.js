@@ -5,6 +5,7 @@ import {
   login,
   badauth,
   signout,
+  me
 } from "../../controllers/authController.js";
 
 const authRouter = Router();
@@ -47,5 +48,10 @@ authRouter.post(
   }),
   signout
 );
+
+authRouter.post("/me", passport.authenticate("jwt", {
+  session: false,
+  failureRedirect: "/api/auth/badauth",
+}), me)
 
 export default authRouter;
