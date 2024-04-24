@@ -22,7 +22,7 @@ export default function SeacrhCourses() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "https://c17-15-t-node-react.onrender.com/api/courses"
+          "https://c17-15-t-node-react.onrender.com/api/courses?limit=200"
         );
         if (!response.ok) {
           throw new Error("Error al obtener los cursos");
@@ -140,7 +140,7 @@ export default function SeacrhCourses() {
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <Typography variant="h6">{course.tutor_id.name}</Typography>
+                  {/* <Typography variant="h6">{course.tutor_id.name}</Typography> */}
                   <Typography variant="h6" className="text-primary capitalize">
                     {course.level}
                   </Typography>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Card,
   Input,
@@ -8,13 +9,17 @@ import {
   CardHeader,
   CardBody,
 } from "@material-tailwind/react";
+import axios from "axios";
+import { useUser } from "../../context/userProvider";
 
-export function LogInSignUp({ signInit, onChangeSignIn }) {
+export function LogInSignUp({ signInit }) {
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const [signIn, setSignIn] = useState(signInit);
+  const { user, updateUser } = useUser();
+
 
   const handleSignUp = () => {
     // Aquí puedes enviar los datos del formulario al backend para el registro
@@ -25,17 +30,31 @@ export function LogInSignUp({ signInit, onChangeSignIn }) {
     });
   };
 
-  const handleSignIn = () => {
-    // Aquí puedes enviar los datos del formulario al backend para el registro
-    console.log("Logueando usuario:", {
-      email,
-      password,
-    });
+  const handleSignIn = async () => {
+    try {
+      const response = await axios.post("http://localhost:8080/api/auth/login", {
+        email,
+        password,
+      });
+      // Verifica si la solicitud de inicio de sesión fue exitosa
+      if (response.status === 200) {
+        // Actualiza los datos del usuario utilizando la función proporcionada por el contexto
+        updateUser(response.data.user);
+        
+        console.log(user);
+      } else {
+        // Maneja errores si el inicio de sesión no fue exitoso
+        console.error("Inicio de sesión fallido");
+      }
+    } catch (error) {
+      // Maneja errores de red u otros errores
+      console.error("Error al iniciar sesión:", error);
+    }
   };
 
   const handleChangeSignIn = () => {
     setSignIn(!signIn);
-    
+
   };
 
   return (
@@ -62,14 +81,14 @@ export function LogInSignUp({ signInit, onChangeSignIn }) {
         )}
         <CardBody className="flex flex-col gap-4 -mt-8">
 
-          <Input label="Correo Electronico" type="email" size="lg" value={email} onChange={(e) => setEmail(e.target.value)}  />
+          <Input label="Correo Electronico" type="email" size="lg" value={email} onChange={(e) => setEmail(e.target.value)} />
 
           <Input
             label="Contraseña"
             type="password"
             size="lg"
             value={password}
-            onChange={(e) => setPass(e.target.value)} 
+            onChange={(e) => setPass(e.target.value)}
           />
         </CardBody>
         {!signIn && (
@@ -111,6 +130,6 @@ export function LogInSignUp({ signInit, onChangeSignIn }) {
         </Typography>
       </form>
     </Card>
-   
+
   );
 }
