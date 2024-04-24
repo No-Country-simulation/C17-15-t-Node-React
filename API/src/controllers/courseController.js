@@ -13,35 +13,75 @@ class CourseController {
         response,
       });
     } catch (error) {
-      next(error)
+      next(error);
     }
   };
-
-  read = async (req, res, next) => {
+  readByTutor = async (req, res, next) => {
     try {
+
+      console.log(req.user)
+
       const options = {
-        limit: req.query.limit || 10,
+        limit: req.query.limit || 4,
         page: req.query.page || 1,
-        sort: { name: 1 }
-      }
+        sort: { name: 1 },
+      };
 
-      const filter = {}
+      const filter = {
+        tutor_id: req.user._id
+      };
 
-      if(req.query.name) {
-        filter.name = new RegExp(req.query.name.trim(), 'i')
+      if (req.query.title) {
+        filter.title = new RegExp(req.query.title.trim(), "i");
       }
 
       const response = await this.controller.read(filter, options);
-      console.log(response)
       if (response.docs.length > 0) {
         return res.json({
           statusCode: 200,
           response,
         });
       } else {
-        const error = new Error("not found documents")
-        error.statusCode = 404
-        throw error
+        const error = new Error("not found documents");
+        error.statusCode = 404;
+        throw error;
+      }
+    } catch (error) {
+      next(error);
+    }
+  };
+  
+  read = async (req, res, next) => {
+    try {
+
+      console.log(req.user)
+
+      const options = {
+        limit: req.query.limit || 4,
+        page: req.query.page || 1,
+        sort: { name: 1 },
+      };
+
+      const filter = {};
+
+      if (req.query.title) {
+        filter.title = new RegExp(req.query.title.trim(), "i");
+      }
+
+      if (req.query.tutor_id) {
+        filter.tutor_id = req.query.tutor_id
+      }
+
+      const response = await this.controller.read(filter, options);
+      if (response.docs.length > 0) {
+        return res.json({
+          statusCode: 200,
+          response,
+        });
+      } else {
+        const error = new Error("not found documents");
+        error.statusCode = 404;
+        throw error;
       }
     } catch (error) {
       next(error);
@@ -80,315 +120,81 @@ class CourseController {
       const { id } = req.params;
       const response = await this.controller.delete(id);
       return res.json({
-        statusCode: (response ? 200 : 404),
-        response: response || "not found document" 
+        statusCode: response ? 200 : 404,
+        response: response || "not found document",
       });
     } catch (error) {
       next(error);
     }
   };
-  // Controladores de content
 
-  // Agregar contenido a un curso
-  addContent = async (req, res) => {
+  addStudent = async (req, res, next) => {
     try {
-      const { courseId } = req.params;
-      const contentData = req.body;
-      const course = await this.controller.readOne(courseId);
-
-      if (!course) {
-        return res.status(404).json({ message: "Course not found" });
+      const { cid } = req.params;
+      const user = req.user
+      console.log(user)
+      const existsCourse = await this.controller.readOne(cid)
+      if(!existsCourse) {
+        return res.json({
+          statusCode: 404,
+          message: "El curso no existe"
+        })
       }
-
-      course.contents.push(contentData);
-      await this.controller.update(courseId, course);
-      res.status(201).json({ message: "Content added successfully", course });
+      if(existsCourse.enrolled_students.includes(user._id)) {
+        return res.json({
+          statusCode: 400,
+          message: "el usuario ya esta registrado"
+        })
+      }
+      await this.controller.update(cid, { $push: { enrolled_students: user._id } });
+      return res.json({
+        statusCode: 200,
+        message: "usuario registrado correctamente"
+      })
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error adding content: " + error.message });
+      next(error)
     }
   };
-
-  // Leer todos los contenidos de un curso
-  readContents = async (req, res) => {
+  rateCourse = async(req, res, next) => {
     try {
-      const { courseId } = req.params;
-      const course = await this.controller.readOne(courseId);
+      const { cid } = req.params
+      const {rating, comment} = req.body
+      const userId = req.user._id
 
-      if (!course) {
-        return res.status(404).json({ message: "Course not found" });
+      const course = await this.controller.readOne(cid)
+
+      if(!course) {
+        return res.json({
+          statusCode: 404,
+          message: "El curso no existe"
+        }) 
       }
-
-      res.status(200).json(course.contents);
+      const existingRating = course.ratings.find((r) => r.user.toString() === userId.toString());
+      if(existingRating) {
+        existingRating.rating = rating
+        existingRating.comment = comment
+      } else {
+        course.ratings.push({ user: userId, rating, comment });
+      }
+      const totalRatings = course.ratings.length;
+      let sumRatings = 0;
+      course.ratings.forEach((r) => {
+        sumRatings += r.rating;
+      });
+      course.avg_rating = totalRatings > 0 ? sumRatings / totalRatings : 0;
+  
+      await course.save();
+      return res.json({
+        statusCode: 200,
+        message: "curso valorado correctamente"
+      })
     } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error reading contents: " + error.message });
+      next(error)
     }
-  };
-
-  // Leer un contenido específico de un curso
-  readOneContent = async (req, res) => {
-    try {
-      const { courseId, contentId } = req.params;
-      const course = await this.controller.readOne(courseId);
-
-      if (!course) {
-        return res.status(404).json({ message: "Course not found" });
-      }
-
-      const content = course.contents.find(
-        (content) => content._id.toString() === contentId
-      );
-      if (!content) {
-        return res.status(404).json({ message: "Content not found" });
-      }
-
-      res.status(200).json(content);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error reading content: " + error.message });
-    }
-  };
-  // Actualizar un contenido específico de un curso
-  updateContent = async (req, res) => {
-    try {
-      const { courseId, contentId } = req.params;
-      const contentData = req.body;
-      const course = await this.controller.readOne(courseId);
-
-      if (!course) {
-        return res.status(404).json({ message: "Course not found" });
-      }
-
-      const contentIndex = course.contents.findIndex(
-        (content) => content._id.toString() === contentId
-      );
-      if (contentIndex === -1) {
-        return res.status(404).json({ message: "Content not found" });
-      }
-
-      course.contents[contentIndex] = {
-        ...course.contents[contentIndex].toObject(),
-        ...contentData,
-      };
-      await this.controller.update(courseId, course);
-      res.status(200).json({ message: "Content updated successfully", course });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error updating content: " + error.message });
-    }
-  };
-
-  // Eliminar un contenido específico de un curso
-  deleteContent = async (req, res) => {
-    try {
-      const { courseId, contentId } = req.params;
-      const course = await this.controller.readOne(courseId);
-
-      if (!course) {
-        return res.status(404).json({ message: "Course not found" });
-      }
-
-      course.contents = course.contents.filter(
-        (content) => content._id.toString() !== contentId
-      );
-      await this.controller.update(courseId, course);
-      res.status(200).json({ message: "Content deleted successfully", course });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error deleting content: " + error.message });
-    }
-  };
-
-  // Controladores de flujo de estudiantes
-
-  async findCourse(courseId) {
-    const course = await this.controller.readOne(courseId);
-    if (!course) {
-      throw new Error("Course not found");
-    }
-    return course;
   }
-
-  isStudentInList(studentId, list) {
-    return list.some((id) => id.toString() === studentId);
-  }
-
-  addPendingStudent = async (req, res) => {
-    try {
-      const { courseId } = req.params;
-      const { studentId } = req.body;
-
-      const course = await this.findCourse(courseId);
-
-      const isAlreadyPending = this.isStudentInList(
-        studentId,
-        course.pending_students
-      );
-      const isAlreadyEnrolled = this.isStudentInList(
-        studentId,
-        course.enrolled_students
-      );
-
-      if (isAlreadyPending || isAlreadyEnrolled) {
-        return res.status(409).json({
-          message: "Student is already pending or enrolled in this course",
-        });
-      }
-
-      course.pending_students.push(studentId);
-      await this.controller.update(courseId, course);
-      res.status(200).json({
-        message: "Student added to pending list successfully",
-        course,
-      });
-    } catch (error) {
-      const statusCode = error.message === "Course not found" ? 404 : 500;
-      res.status(statusCode).json({
-        message: `Error adding student to pending list: ${error.message}`,
-      });
-    }
-  };
-
-  removePendingStudent = async (req, res) => {
-    try {
-      const { courseId, studentId } = req.params;
-
-      const course = await this.findCourse(courseId);
-
-      const isPending = this.isStudentInList(
-        studentId,
-        course.pending_students
-      );
-
-      if (!isPending) {
-        return res
-          .status(404)
-          .json({ message: "Student not found in pending list" });
-      }
-
-      course.pending_students = course.pending_students.filter(
-        (id) => id.toString() !== studentId
-      );
-
-      await this.controller.update(courseId, course);
-      res.status(200).json({
-        message: "Student removed from pending list successfully",
-        course,
-      });
-    } catch (error) {
-      const statusCode = error.message === "Course not found" ? 404 : 500;
-      res.status(statusCode).json({
-        message: `Error removing student from pending list: ${error.message}`,
-      });
-    }
-  };
-
-  approvePendingStudent = async (req, res) => {
-    try {
-      const { courseId, studentId } = req.params;
-
-      const course = await this.findCourse(courseId);
-
-      const isPending = this.isStudentInList(
-        studentId,
-        course.pending_students
-      );
-
-      if (!isPending) {
-        return res
-          .status(404)
-          .json({ message: "Student not found in pending list" });
-      }
-
-      course.pending_students = course.pending_students.filter(
-        (id) => id.toString() !== studentId
-      );
-      course.enrolled_students.push(studentId);
-
-      await this.controller.update(courseId, course);
-      res.status(200).json({
-        message: "Student approved successfully",
-        course,
-      });
-    } catch (error) {
-      const statusCode = error.message === "Course not found" ? 404 : 500;
-      res.status(statusCode).json({
-        message: `Error approving student: ${error.message}`,
-      });
-    }
-  };
-  // Actualizar el promedio de calificaciones de un curso
-  updateAverageRating = async (courseId) => {
-    try {
-      const course = await this.controller.readOne(courseId);
-      if (!course) {
-        console.log("Course not found");
-        return;
-      }
-
-      const ratings = await CourseRating.find({ course: courseId });
-      const avgRating =
-        ratings.reduce((acc, { rating }) => acc + rating, 0) / ratings.length;
-
-      course.avg_rating = avgRating;
-      await this.controller.update(courseId, course);
-    } catch (error) {
-      console.error("Error updating average rating: " + error.message);
-    }
-  };
-
-  // Controladores auxiliares
-
-  listEnrolledStudents = async (req, res) => {
-    try {
-      const { courseId } = req.params;
-      const course = await this.findCourse(courseId);
-      // Asumiendo que hay un método para obtener detalles de los estudiantes
-      const enrolledStudentsDetails = course.enrolled_students; // Simplificación para el ejemplo
-      res.status(200).json(enrolledStudentsDetails);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: `Error listing enrolled students: ${error.message}` });
-    }
-  };
-
-  changeCourseStatus = async (req, res) => {
-    try {
-      const { courseId } = req.params;
-      const { status } = req.body; // Nuevo estado del curso
-      const course = await this.findCourse(courseId);
-      course.status = status;
-      await this.controller.update(courseId, course);
-      res
-        .status(200)
-        .json({ message: "Course status updated successfully", course });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: `Error changing course status: ${error.message}` });
-    }
-  };
-
-  readAllRatingsByCourse = async (req, res) => {
-    try {
-      const { courseId } = req.params;
-      const course = await this.findCourse(courseId);
-      const ratings = await CourseRating.find({ course: courseId });
-      res.status(200).json(ratings);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: `Error reading ratings: ${error.message}` });
-    }
-  };
 }
+
+
 
 const controller = new CourseController(course);
 export const {
@@ -397,16 +203,7 @@ export const {
   readOne,
   destroy,
   update,
-  addContent,
-  readContents,
-  readOneContent,
-  updateContent,
-  deleteContent,
-  addPendingStudent,
-  removePendingStudent,
-  approvePendingStudent,
-  updateAverageRating,
-  listEnrolledStudents,
-  changeCourseStatus,
-  readAllRatingsByCourse,
+  addStudent,
+  readByTutor,
+  rateCourse
 } = controller;

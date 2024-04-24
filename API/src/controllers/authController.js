@@ -28,7 +28,7 @@ class AuthController {
 
   badauth = async (req, res, next) => {
     try {
-      return res.json({
+      return res.clearCookie("token").json({
         statusCode: 401,
         message: "Bad auth",
       });

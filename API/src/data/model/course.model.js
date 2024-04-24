@@ -5,6 +5,15 @@ import mongoosePaginate from "mongoose-paginate-v2";
 const collection = "Course"
 
 // Definición del esquema para los contenidos del curso
+const courseRatingSchema = new Schema(
+  {
+    user: { type: Types.ObjectId, ref: "User", required: true },
+    rating: { type: Number, required: true, enum: [1, 2, 3, 4, 5]},
+    comment: { type: String }
+  },
+  { timestamps: true }
+);
+
 const courseContentSchema = new Schema(
   {
     title: { type: String, required: true },
@@ -36,9 +45,8 @@ const schema = new Schema(
     },
     status: { type: String, required: true },
     enrolled_students: [{ type: Types.ObjectId, ref: "User" }],
-    pending_students: [{ type: Types.ObjectId, ref: "User" }],
-    ratings: [{ type: Types.ObjectId, ref: "CourseRating" }],
-    avg_rating: { type: Number, required: true, default: 0 },
+    ratings: [courseRatingSchema],
+    avg_rating: { type: Number },
     contents: [courseContentSchema], // Arreglo de contenidos
   },
   { timestamps: true }
