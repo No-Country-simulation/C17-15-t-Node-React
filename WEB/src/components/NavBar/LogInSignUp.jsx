@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import {
   Card,
   Input,
@@ -11,6 +11,7 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { useUser } from "../../context/userProvider";
+import API_URL from "../../config/Config";
 
 export function LogInSignUp({ signInit }) {
 
@@ -32,15 +33,17 @@ export function LogInSignUp({ signInit }) {
 
   const handleSignIn = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/api/auth/login", {
+      const response = await axios.post(`${API_URL}auth/login`, {
         email,
         password,
       });
       // Verifica si la solicitud de inicio de sesión fue exitosa
       if (response.status === 200) {
         // Actualiza los datos del usuario utilizando la función proporcionada por el contexto
-        updateUser(response.data.user);
-        
+        const userStringgify = JSON.stringify(response.data.user);
+        updateUser(userStringgify); 
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", userStringgify);
         console.log(user);
       } else {
         // Maneja errores si el inicio de sesión no fue exitoso

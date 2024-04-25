@@ -23,16 +23,16 @@ export const fetchUserData = async () => {
   export const fetchCourseData = async () => {
     try {
       const response = await fetch(
-        `${API_URL}/courses/`
+        `${API_URL}/courses?limit=200`
       );
       if (!response.ok) {
         throw new Error("Error al obtener la información del usuario");
       }
-      const userData = await response.json();
+      const courseData = await response.json();
    
-      return userData;
+      return courseData;
     } catch (error) {
-      console.error("Hubo un error al obtener la información del usuario:", error);
+      console.error("Hubo un error al obtener la información del curso:", error);
       throw error; // Propagar el error para que se maneje en el componente
     }
   };

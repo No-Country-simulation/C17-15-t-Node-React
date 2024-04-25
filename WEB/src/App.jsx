@@ -16,7 +16,7 @@ import { VerificationContextProvider } from "./context/verificationContext";
 const App = () => {
   
   return (
-    <VerificationContextProvider>
+   
       <UserProvider>
         <Router>
           <NavBar /> {/* Render Navbar before Routes */}
@@ -35,7 +35,7 @@ const App = () => {
           <Footer /> {/* Render Footer after Routes */}
         </Router>
       </UserProvider>
-    </VerificationContextProvider>
+   
   );
 };
 

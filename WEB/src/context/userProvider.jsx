@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 // Creamos un contexto para almacenar los datos del usuario
 const UserContext = createContext();
@@ -16,6 +16,13 @@ export const UserProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
   };
+
+  useEffect(() => {
+    // Obtenemos los datos del usuario desde el localStorage
+    const userString = localStorage.getItem("user");
+    const userParse = JSON.parse(userString);
+    updateUser(userParse);
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, updateUser, logout }}>
