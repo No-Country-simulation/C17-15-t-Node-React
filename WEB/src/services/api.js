@@ -1,7 +1,7 @@
 import API_URL from "../config/Config";
 const student = "66212d07cdddee65fd13d383";
 const tutor = "66212d1a1b7f3a7444987891";
-const user = student;
+const user = tutor;
 
 export const fetchUserData = async () => {
     try {
