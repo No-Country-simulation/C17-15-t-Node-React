@@ -114,10 +114,12 @@ export function Profile() {
             <div className="w-full lg:w-1/2 p-2 flex flex-col items-center border-2 rounded-md border-secondary">
                 {/* Encabezado */}
                 <div className="bg-primary rounded-md text-white px-4 py-6">
-                    <h1 className="text-2xl  font-semibold">Cursos del Usuario</h1>
+                    <h1 className="text-2xl font-semibold">
+                        {user.role === 'tutor' ? 'Cursos Creados' : 'Cursos Inscriptos'}
+                    </h1>
                 </div>
                 {/* Contenido del Curso */}
-                <div className="flex flex-wrap lg:m-10">
+                <div className="flex flex-wrap lg:m-10 max-h-screen overflow-y-auto overflow-x-hidden">
                     {courseData && courseData.length > 0 ? (
                         courseData.map((course) => (
                             <div key={course._id} className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2">
@@ -128,8 +130,8 @@ export function Profile() {
                                         className="object-cover w-full max-h-48 md:max-h-56 lg:max-h-64 xl:max-h-72" // Ajusta las alturas según tus necesidades
                                     />
                                     <Typography className='text-sm' variant="h3">{course.title}</Typography>
-                                    <h1>Estudiantes</h1>
-                                    <h1>{course.enrolled_students}</h1>
+                                    {/* <h1>Estudiantes</h1>
+                                    <h1>{course.enrolled_students}</h1> */}
                                 </Card>
                             </div>
                         ))
