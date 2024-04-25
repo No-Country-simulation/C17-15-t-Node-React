@@ -2,16 +2,13 @@ import { faker } from '@faker-js/faker';
 import dbConnection from '../dbConnection.js';
 import Course from '../../data/model/course.model.js';
 import User from '../../data/model/user.model.js';
-import Subject from '../../data/model/subject.model.js'; // Importa el modelo de Subject
+import Subject from '../../data/model/subject.model.js'; 
 
 const generarDatosFicticios = async () => {
   try {
     await dbConnection();
-    // Busca usuarios con el rol de "tutor"
     const tutores = await User.find({ role: 'tutor' });
-
-    // Obtiene los IDs de los tutores
-    const tutors = tutores.map(tutor => tutor._id);
+    const students = await User.find({ role: 'student' });
     const subjects = await Subject.find({}, '_id');
 
     for (let i = 0; i < 10; i++) {
@@ -30,8 +27,18 @@ const generarDatosFicticios = async () => {
         courseContents.push(content);
       }
 
-      const randomTutorId = faker.helpers.arrayElement(tutors.map(tutor => tutor._id));
+      const randomTutorId = faker.helpers.arrayElement(tutores.map(tutor => tutor._id));
       const randomSubjectId = faker.helpers.arrayElement(subjects.map(subject => subject._id));
+
+      const enrolledStudents = [];
+
+      // Simular la inscripción de 1 a 5 estudiantes ficticios
+      const numEnrolledStudents = faker.number.int({ min: 1, max: 5 });
+      for (let k = 0; k < numEnrolledStudents; k++) {
+        const randomStudent = faker.helpers.arrayElement(students);
+        const student = await User.findById(randomStudent._id); // Obtener la información completa del usuario
+        enrolledStudents.push(student);
+      }
 
       const course = new Course({
         title: faker.lorem.words(),
@@ -44,6 +51,7 @@ const generarDatosFicticios = async () => {
         level: faker.helpers.arrayElement(['beginner', 'intermediate', 'advanced']),
         thumbnail: faker.image.url(),
         status: faker.helpers.arrayElement(['draft', 'published']),
+        enrolled_students: enrolledStudents,
         contents: courseContents,
       });
 
