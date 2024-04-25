@@ -7,6 +7,7 @@ class CourseController {
   create = async (req, res, next) => {
     try {
       const data = req.body;
+      data.tutor_id = req.user._id
       const response = await this.controller.create(data);
       res.json({
         statusCode: 201,
@@ -50,9 +51,7 @@ class CourseController {
   
   read = async (req, res, next) => {
     try {
-
       console.log(req.user)
-
       const options = {
         limit: req.query.limit || 4,
         page: req.query.page || 1,
@@ -60,7 +59,6 @@ class CourseController {
       };
 
       const filter = {};
-
       if (req.query.title) {
         filter.title = new RegExp(req.query.title.trim(), "i");
       }
@@ -128,28 +126,37 @@ class CourseController {
   addStudent = async (req, res, next) => {
     try {
       const { cid } = req.params;
-      const user = req.user
-      console.log(user)
-      const existsCourse = await this.controller.readOne(cid)
-      if(!existsCourse) {
+      const user = req.user;
+      const existsCourse = await this.controller.readOne(cid);
+      if (!existsCourse) {
         return res.json({
           statusCode: 404,
           message: "El curso no existe"
-        })
+        });
       }
-      if(existsCourse.enrolled_students.includes(user._id)) {
+      if (existsCourse.enrolled_students.some(student => student.user_id === user._id)) {
         return res.json({
           statusCode: 400,
-          message: "el usuario ya esta registrado"
-        })
+          message: "El usuario ya está registrado en este curso"
+        });
       }
-      await this.controller.update(cid, { $push: { enrolled_students: user._id } });
+      const { name, lastName, email } = user;
+      await this.controller.update(cid, { 
+        $push: { 
+          enrolled_students: { 
+            user_id: user._id,
+            name,
+            lastName,
+            email
+          } 
+        } 
+      });
       return res.json({
         statusCode: 200,
-        message: "usuario registrado correctamente"
-      })
+        message: "Usuario registrado correctamente en el curso"
+      });
     } catch (error) {
-      next(error)
+      next(error);
     }
   };
   rateCourse = async(req, res, next) => {
@@ -189,9 +196,8 @@ class CourseController {
       next(error)
     }
   }
+
 }
-
-
 
 const controller = new CourseController(course);
 export const {

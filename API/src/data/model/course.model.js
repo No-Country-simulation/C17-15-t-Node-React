@@ -14,11 +14,26 @@ const courseRatingSchema = new Schema(
   { timestamps: true }
 );
 
+const enrolledStudentSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  }
+});
+
 const courseContentSchema = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String },
-    type: { type: String, required: true }, // Ejemplo: "video", "audio", "documento".
+    type: { type: String, required: true },
     url: { type: String, required: true },
     duration: { type: Number, required: true },
     order: { type: Number, required: true },
@@ -26,7 +41,6 @@ const courseContentSchema = new Schema(
   { _id: false, timestamps: true }
 );
 
-// Definición del esquema principal del curso
 const schema = new Schema(
   {
     title: { type: String, required: true },
@@ -44,7 +58,7 @@ const schema = new Schema(
         "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg",
     },
     status: { type: String, required: true },
-    enrolled_students: [{ type: Types.ObjectId, ref: "User" }],
+    enrolled_students: [enrolledStudentSchema],
     ratings: [courseRatingSchema],
     avg_rating: { type: Number },
     contents: [courseContentSchema], // Arreglo de contenidos
