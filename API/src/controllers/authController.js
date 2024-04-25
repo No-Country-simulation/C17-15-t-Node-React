@@ -1,4 +1,4 @@
-import users from "../data/model/user.model.js";
+import { users } from "../data/mongoManager.js";
 
 class AuthController {
   constructor() {
@@ -20,7 +20,7 @@ class AuthController {
       return res.cookie("token", req.token).json({
         message: "logged In",
         statusCode: 200,
-        token: req.token
+        token: req.token,
       });
     } catch (error) {
       next(error);
@@ -49,17 +49,38 @@ class AuthController {
   };
   me = async (req, res, next) => {
     try {
-      const userData = req.user
+      const userData = req.user;
       return res.json({
         statusCode: 200,
         message: "Usuario autenticado",
-        userData
-      })
+        userData,
+      });
     } catch (error) {
-      next(error)
+      next(error);
     }
-  }
+  };
+  verifyCode = async (req, res, next) => {
+    try {
+      const { uid } = req.params;
+      const user = await this.model.readOne(uid);
+      if (!user) {
+        return res.json({ 
+          message: "Usuario no encontrado",
+          statusCode: 404 
+        });
+      }
+      const data = { verified: true };
+      const opts = { new: true };
+      const response = await this.model.update(user._id, data, opts);
+      return res.json({
+        statusCode: 200,
+        response,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 const controller = new AuthController();
-export const { register, badauth, signout, login, me } = controller;
+export const { register, badauth, signout, login, me, verifyCode } = controller;

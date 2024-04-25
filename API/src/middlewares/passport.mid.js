@@ -5,7 +5,7 @@ import { createHash, isValidPass } from "../utils/hash.util.js";
 import { users } from "../data/mongoManager.js";
 import crypto from "crypto";
 import { createToken } from "../utils/jwt.util.js";
-import sendEmail from "../utils/nodeMailer/nodemailer.js";
+import sendEmail from "../utils/nodeMailer/nodemailer.js"
 
 passport.use(
   "register",
@@ -17,9 +17,9 @@ passport.use(
         if (user) return done(null, false);
         const data = req.body;
         data.password = createHash(password);
-        data.verifyCode = crypto.randomBytes(6).toString("hex");
+        data.verifyCode = crypto.randomBytes(12).toString("hex")
         user = await users.create(data);
-        sendEmail(data)
+        await sendEmail(data)
         return done(null, user);
       } catch (error) {
         done(error);

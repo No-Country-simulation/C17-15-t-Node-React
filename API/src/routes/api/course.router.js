@@ -15,11 +15,11 @@ const coursesRouter = Router();
 
 coursesRouter.post("/", create);
 coursesRouter.get("/", read);
-coursesRouter.get("/readByTutor", passport.authenticate("jwt", {session: false}), readByTutor); //ok
+coursesRouter.get("/readByTutor", passport.authenticate("jwt", {session: false}), readByTutor);
 coursesRouter.get("/:id", readOne);
 coursesRouter.put("/:id", update);
 coursesRouter.delete("/:id", destroy);
-coursesRouter.put("/addStudent/:cid", passport.authenticate("jwt", {session: false}), addStudent) //ok
+coursesRouter.put("/addStudent/:cid", passport.authenticate("jwt", {session: false}), addStudent) 
 coursesRouter.post("/ratings/:cid", passport.authenticate("jwt", {session: false}), rateCourse)
 
 export default coursesRouter;

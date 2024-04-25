@@ -18,9 +18,6 @@ class CourseController {
   };
   readByTutor = async (req, res, next) => {
     try {
-
-      console.log(req.user)
-
       const options = {
         limit: req.query.limit || 4,
         page: req.query.page || 1,
