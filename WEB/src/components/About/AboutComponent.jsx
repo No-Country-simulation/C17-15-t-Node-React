@@ -1,5 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import { OurTeam } from "./OurTeam";
+import { NewCourse } from "../NewCourse";
 
 export const AboutComponent = () => {
   return (
@@ -58,6 +59,7 @@ export const AboutComponent = () => {
         </Typography>
       </div>
       <OurTeam />
+      <NewCourse />
     </div>
   );
 };
