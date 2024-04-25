@@ -16,11 +16,13 @@ class AuthController {
   };
 
   login = async (req, res, next) => {
+    const userData = req.user
     try {
       return res.cookie("token", req.token).json({
         message: "logged In",
         statusCode: 200,
         token: req.token,
+        user: userData
       });
     } catch (error) {
       next(error);
