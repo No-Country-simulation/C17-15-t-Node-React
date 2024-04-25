@@ -4,14 +4,17 @@ const LINKS = [
   {
     title: "Acerca de",
     items: ["Cursos", "Tutores", "Alumnos", "Pagos"],
+    urlFooter: ["/courses" ],
   },
   {
     title: "Comunidad",
-    items: ["Eventos", "Blog", "Podcast", "Peguntas Frecuentes"],
+    items: ["Sobre nosotros", "Blog", "Podcast", "Peguntas Frecuentes"], 
+    urlFooter: ["/about" ],
   },
   {
     title: "Sociales",
     items: ["Discord", "Instagram", "Twitter", "Facebook"],
+    urlFooter: ["https://discord.com/" ],
   },
 ];
 
@@ -86,7 +89,7 @@ export function Footer() {
             </div>
           </div>
           <div className="grid grid-cols-2 justify-between justify-items-center gap-4 md:grid-cols-3 md:justify-between md:gap-9 pt-12">
-            {LINKS.map(({ title, items }) => (
+            {LINKS.map(({ title, items, urlFooter }) => (
               <ul key={title}>
                 <Typography
                   variant="h5"
@@ -99,7 +102,7 @@ export function Footer() {
                   <li key={link}>
                     <Typography
                       as="a"
-                      href="#"
+                      href={urlFooter}
                       color="white"
                       className="py-2 text-center sm:text-start font-normal transition-colors hover:font-bold"
                     >
@@ -118,13 +121,13 @@ export function Footer() {
             className="mb-4 text-center font-normal md:mb-0"
           >
             &copy; {currentYear}{" "}
-            <a href="https://material-tailwind.com/">MasterAula</a>.
+            <a href="/">MasterAula</a>.
             All Rights Reserved.
           </Typography>
           <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
             <Typography
               as="a"
-              href="#"
+              href="/"
               color="white"
               variant="small"
               className="mb-4 text-center font-normal md:mb-0"
@@ -133,7 +136,7 @@ export function Footer() {
             </Typography>
             <Typography
               as="a"
-              href="#"
+              href="/"
               color="white"
               variant="small"
               className="mb-4 text-center font-normal md:mb-0"
