@@ -11,6 +11,7 @@ import { ButtonNavBar } from "./ButtonNavBar";
 import { LogInSignUp } from "./LogInSignUp";
 import { SignProvider } from "../../context/signProvider";
 import { useUser } from "../../context/userProvider";
+import { ProfileMenu } from "../ProfileMenu";
 
 export const NavBar = () => {
   const links = [
@@ -22,8 +23,8 @@ export const NavBar = () => {
 
   ];
 
-  const { user, logout  } = useUser();
-  console.log(user);
+  const { user, logout } = useUser();
+  const userData = user;
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -65,7 +66,11 @@ export const NavBar = () => {
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
 
-              {user ? (<Button onClick={logout}>Cerrar Sesion</Button>) : (<>
+              {user ? (<>
+                <div className="items-center gap-x-4 hidden lg:flex ">
+              <ProfileMenu userData={userData} />
+              </div>
+              </>) : (<>
                 <div className="items-center gap-x-4 hidden lg:flex 2xl:hidden">
                   <ButtonNavBar buttonText="Regístrate"
                     dialogContent={<LogInSignUp signInit={false} />}
@@ -123,18 +128,20 @@ export const NavBar = () => {
               </IconButton>
             </div>
           </div>
-          <MobileNav open={openNav}>
+          <MobileNav open={openNav} className="text-center">
             {navList}
-            {user ? (<Button onClick={logout}>Cerrar Sesion</Button>):(<>
-            <div className="flex items-center gap-x-1">
-              <ButtonNavBar buttonText="Regístrate"
-                dialogContent={<LogInSignUp signInit={false} />}
-                size="xl" />
-              <ButtonNavBar buttonText="Inicia Sesión"
-                dialogContent={<LogInSignUp signInit={true} />}
-                size="xl" />
-            </div>
-            </>)}
+            {user ? (
+              <ProfileMenu userData={userData} />              
+              ) : (<>
+                <div className="flex items-center gap-x-1">
+                  <ButtonNavBar buttonText="Regístrate"
+                    dialogContent={<LogInSignUp signInit={false} />}
+                    size="xl" />
+                  <ButtonNavBar buttonText="Inicia Sesión"
+                    dialogContent={<LogInSignUp signInit={true} />}
+                    size="xl" />
+                </div>
+              </>)}
           </MobileNav>
         </Navbar>
       </div>

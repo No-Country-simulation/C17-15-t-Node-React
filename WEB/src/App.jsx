@@ -11,31 +11,29 @@ import { Profile } from "./pages/Profile";
 import { AnimatePresence } from "framer-motion";
 import { CourseDetailContainer } from "./components/courseDetail/CourseDetailContainer";
 import { UserProvider } from "./context/userProvider";
-import { VerificationContextProvider } from "./context/verificationContext";
+
 
 const App = () => {
-  
+
   return (
-   
+    <Router>
       <UserProvider>
-        <Router>
-          <NavBar /> {/* Render Navbar before Routes */}
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<Home />} />{" "}
-              {/* Descomenta y establece la ruta a "/" */}
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/course/:cid" element={<CourseDetailContainer />} />
-            </Routes>
-          </AnimatePresence>
-          <Footer /> {/* Render Footer after Routes */}
-        </Router>
+        <NavBar /> {/* Render Navbar before Routes */}
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<Home />} />{" "}
+            {/* Descomenta y establece la ruta a "/" */}
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/course/:cid" element={<CourseDetailContainer />} />
+          </Routes>
+        </AnimatePresence>
+        <Footer /> {/* Render Footer after Routes */}
       </UserProvider>
-   
+    </Router>
   );
 };
 

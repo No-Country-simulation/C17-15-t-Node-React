@@ -27,7 +27,7 @@ export function Profile() {
     if (!userData) {
         return <div>Cargando...</div>;
     }
-    console.log(userData.name);
+    
 
     return (
         <div className="flex flex-col lg:flex-row p-8 m-auto gap-8 justify-center ">
