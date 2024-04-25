@@ -33,7 +33,7 @@ const MenuTutorias = () => {
     <div className=''>
         <div className="text-4xl text-center font-extrabold mb-10 sm:text-6xl ">
           <span className="bg-clip-text text-transparent bg-gradient-to-br from-primary to-secondary ">
-            Nuestros Cursos Mas Populares
+            Nuestros Cursos Más Populares
           </span>
         </div>
       <p>

@@ -128,6 +128,8 @@ export function Profile() {
                                         className="object-cover w-full max-h-48 md:max-h-56 lg:max-h-64 xl:max-h-72" // Ajusta las alturas según tus necesidades
                                     />
                                     <Typography className='text-sm' variant="h3">{course.title}</Typography>
+                                    <h1>Estudiantes</h1>
+                                    <h1>{course.enrolled_students}</h1>
                                 </Card>
                             </div>
                         ))
@@ -136,6 +138,7 @@ export function Profile() {
                     )}
 
                 </div>
+
             </div>
         </div>
     );
