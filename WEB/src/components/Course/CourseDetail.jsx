@@ -7,7 +7,7 @@ import { LogInSignUp } from "../NavBar/LogInSignUp";
 export const CourseDetail = ({ courseInfo }) => {
 
   const { user } = useUser();
-const userData = user;
+  const userData = user;
 
 
   if (!courseInfo) {
@@ -19,7 +19,6 @@ const userData = user;
       courseInfo;
 
     console.log(courseInfo.enrolled_students._id);
-    console.log(userData._id);
 
     return (
 
@@ -88,32 +87,30 @@ const userData = user;
                 </ul>
               </div>
             )} */}
-            
+
             {
-  courseInfo.enrolled_students.some(student => student._id === user._id) ? (
-    <p>Ya está inscrito</p>
-  ) : (
-    user ? (
-      <div className="text-center">
-        <button 
-          className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 mt-3 md:mt-5"
-          onClick={handleInscribirmeClick} // Agrega un manejador de clics aquí
-        >
-          INSCRIBIRME
-        </button>
-      </div>
-    ) : (
-      <>
-        <h2 className="text-gray-900 text-xl text-center font-bold mb-2">Debe Registrarse o Iniciar Sesión</h2>
-        <div className="flex items-center justify-center gap-x-4">
-          <ButtonNavBar buttonText="Regístrate" dialogContent={<LogInSignUp signInit={false} />} size="md" />
-          <ButtonNavBar buttonText="Inicia Sesión" dialogContent={<LogInSignUp signInit={true} />} size="md" />
-        </div>
-      </>
-    )
-  )
-}
-          
+              
+                user ? (
+                  <div className="text-center">
+                    <button
+                      className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 mt-3 md:mt-5"
+                    // onClick={handleInscribirmeClick} // Agrega un manejador de clics aquí
+                    >
+                      INSCRIBIRME
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <h2 className="text-gray-900 text-xl text-center font-bold mb-2">Debe Registrarse o Iniciar Sesión</h2>
+                    <div className="flex items-center justify-center gap-x-4">
+                      <ButtonNavBar buttonText="Regístrate" dialogContent={<LogInSignUp signInit={false} />} size="md" />
+                      <ButtonNavBar buttonText="Inicia Sesión" dialogContent={<LogInSignUp signInit={true} />} size="md" />
+                    </div>
+                  </>
+                )
+              
+            }
+
           </div>
         </div>
       </div>
