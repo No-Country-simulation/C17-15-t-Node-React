@@ -7,6 +7,7 @@ import { useUser } from '../context/userProvider';
 export function Profile() {
 
     const [courseData, setCourseData] = useState(null);
+    const [selectedCourse, setSelectedCourse] = useState(null); // Estado para almacenar el curso seleccionado
     const { user } = useUser();
 
     const userData = user;
@@ -14,7 +15,7 @@ export function Profile() {
         const fetchData = async () => {
             try {
                 const courseData = await fetchCourseData();
-                console.log(courseData);
+                console.log(courseData.response.docs);
                 setCourseData(courseData.response.docs);
             } catch (error) {
                 // Manejar el error
@@ -27,7 +28,11 @@ export function Profile() {
     if (!userData) {
         return <div>Cargando...</div>;
     }
-    
+
+    // Función para manejar el clic en el enlace del curso y actualizar el estado del curso seleccionado
+    const handleCourseClick = (course) => {
+        setSelectedCourse(course);
+    };
 
     return (
         <div className="flex flex-col lg:flex-row p-8 m-auto gap-8 justify-center ">
@@ -69,21 +74,6 @@ export function Profile() {
                                             )}
                                         </ul>
                                         <p>Biografía: {userData?.biography}</p>
-
-                                        <p className="flex items-center -mt-3 -mb-3">
-                                            <p className="mr-2">Promedio de Calificación:</p>
-                                            <div className="flex items-center">
-                                                {[...Array(5)].map((_, index) => {
-                                                    if (index < Math.floor(userData?.average_rating)) {
-                                                        return <BsStarFill key={index} className="text-yellow-400" />;
-                                                    } else if (index < Math.ceil(userData?.average_rating)) {
-                                                        return <BsStarHalf key={index} className="text-yellow-400" />;
-                                                    } else {
-                                                        return <BsStarFill key={index} className="text-gray-300" />;
-                                                    }
-                                                })}
-                                            </div>
-                                        </p>
                                     </>
                                 ) : (
                                     <>
@@ -129,9 +119,11 @@ export function Profile() {
                                         alt="card-image"
                                         className="object-cover w-full max-h-48 md:max-h-56 lg:max-h-64 xl:max-h-72" // Ajusta las alturas según tus necesidades
                                     />
-                                    <Typography className='text-sm' variant="h3">{course.title}</Typography>
-                                    {/* <h1>Estudiantes</h1>
-                                    <h1>{course.enrolled_students}</h1> */}
+                                     <Typography className='text-sm' variant="h3">{course.title}</Typography>
+                                    {/* Agrega un enlace para mostrar los detalles del curso solo si el rol es 'student' */}
+                                    {userData.role === 'student' && (
+                                        <a href="#" className="text-sm font-semibold text-blue-500 hover:underline" onClick={() => handleCourseClick(course)}>Ver Detalles</a>
+                                    )}
                                 </Card>
                             </div>
                         ))
@@ -142,6 +134,22 @@ export function Profile() {
                 </div>
 
             </div>
+            {/* Detalles del Curso */}
+            {selectedCourse && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white p-8 rounded-md">
+                        <h2 className="text-lg font-semibold">Nombre del tutor: {selectedCourse.tutor_id.name} {selectedCourse.tutor_id.lastName}</h2>
+                        <p>Descripcion: {selectedCourse.tutor_id.biography}</p>
+                        <p>Email: {selectedCourse.tutor_id.email}</p>
+                        <img
+                            src={selectedCourse.tutor_id.photo}
+                            alt="Tutor"
+                            className="w-20 h-20 rounded-md border-2 border-secondary mr-4 mb-4"
+                        />
+                        <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md" onClick={() => setSelectedCourse(null)}>Cerrar</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
