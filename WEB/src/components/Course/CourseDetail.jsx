@@ -18,8 +18,6 @@ const userData = user;
     const { title, tutor_id, description, price, level, thumbnail, duration, enrolled_students } =
       courseInfo;
 
-    console.log(courseInfo.enrolled_students._id);
-    console.log(userData._id);
 
     return (
 
@@ -89,15 +87,13 @@ const userData = user;
               </div>
             )} */}
             
-            {
-  courseInfo.enrolled_students.some(student => student._id === user._id) ? (
-    <p>Ya está inscrito</p>
-  ) : (
+            
+{ 
     user ? (
       <div className="text-center">
         <button 
           className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 mt-3 md:mt-5"
-          onClick={handleInscribirmeClick} // Agrega un manejador de clics aquí
+          // onClick={handleInscribirmeClick} // Agrega un manejador de clics aquí
         >
           INSCRIBIRME
         </button>
@@ -111,7 +107,7 @@ const userData = user;
         </div>
       </>
     )
-  )
+  
 }
           
           </div>
