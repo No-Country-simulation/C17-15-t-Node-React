@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { fetchCourseData } from '../services/api';
 import { Card, Typography } from "@material-tailwind/react";
-import {CourseDetail} from "../components/courseDetail/CourseDetail"
+import {CourseDetail} from "../components/Course/CourseDetail"
 
 export function Profile() {
     const [userData, setUserData] = useState(null);
@@ -121,6 +121,7 @@ export function Profile() {
                 <div className="flex flex-wrap lg:m-10 max-h-screen overflow-y-auto overflow-x-hidden">
                     {courseData && courseData.length > 0 ? (
                         courseData.map((course) => (
+                            course.tutor_id === userData._id && (
                             <div key={course._id} className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2" onClick={() => handleCourseClick(course)}>
                                 <Card>
                                     <img
@@ -128,21 +129,25 @@ export function Profile() {
                                         alt="card-image"
                                         className="object-cover w-full max-h-48 md:max-h-56 lg:max-h-64 xl:max-h-72" // Ajusta las alturas según tus necesidades
                                     />
-                                    {/* Agrega un enlace para mostrar los detalles del curso solo si el rol es 'student' */}
-                                    {userData.role === 'student' && (
-                                        <a href="#" className="text-sm font-semibold text-blue-500 hover:underline" onClick={() => handleCourseClick(course)}>Ver Detalles</a>
-                                    )}
+                                   
                                     <Typography className='text-sm' variant="h3">{course.title}</Typography>
                                 </Card>
                             </div>
+                            )
                         ))
                     ) : (
                         <p>No hay cursos disponibles.</p>
                     )}
 
                 </div>
+
+                 {/* Agrega un enlace para mostrar los detalles del curso solo si el rol es 'student'
+                 {userData.role === 'student' && (
+                                        <a href="#" className="text-sm font-semibold text-blue-500 hover:underline" onClick={() => handleCourseClick(course)}>Ver Detalles</a>
+                                    )} */}
+
                 {/* Detalle del curso seleccionado */}
-            {selectedCourse && <CourseDetail courseInfo={selectedCourse} />}
+            {/* {selectedCourse && <CourseDetail courseInfo={selectedCourse} />} */}
 
             </div>
             {/* Detalles del Curso */}
