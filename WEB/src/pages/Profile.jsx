@@ -171,13 +171,14 @@ export function Profile() {
                             // course.tutor_id === userData._id && (
                             <div key={course._id} className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2" onClick={() => handleCourseClick(course)}>
                                 <Card>
+                                    
                                     <img
                                         src={course.thumbnail}
                                         alt="card-image"
-                                        className="object-cover w-full max-h-48 md:max-h-56 lg:max-h-64 xl:max-h-72" // Ajusta las alturas según tus necesidades
+                                        className="object-cover w-full h-[100px]" // Ajusta las alturas según tus necesidades
                                     />
 
-                                    <Typography className='text-sm' variant="h3">{course.title}</Typography>
+                                    <Typography className='flex text-center justify-center items-center text-sm h-10' variant="h3">{course.title}</Typography>
                                 </Card>
                             </div>
                             // )
@@ -243,23 +244,23 @@ export function Profile() {
                                                     <li key={index}>
                                                         <Card className='flex m-2 p-4 border border-secondary'>
                                                             <div>
-                                                            Nombre: {student.name} {student.lastName}
+                                                                Nombre: {student.name} {student.lastName}
                                                             </div>
                                                             <div>
                                                                 Email: {student.email}
                                                             </div>
-                                                            
+
                                                         </Card>
                                                     </li>
                                                 ))}
                                             </ul>
                                         </div>
-                                    ):(
+                                    ) : (
                                         <div className="flex text-xl font-extrabold text-center mb-4 justify-center ">
-                                                <span className=" bg-clip-text text-transparent text-center bg-gradient-to-br from-primary to-secondary">
-                                                    No hay estudiantes inscriptos
-                                                </span>
-                                            </div>
+                                            <span className=" bg-clip-text text-transparent text-center bg-gradient-to-br from-primary to-secondary">
+                                                No hay estudiantes inscriptos
+                                            </span>
+                                        </div>
                                     )
                                 )
                                 }
