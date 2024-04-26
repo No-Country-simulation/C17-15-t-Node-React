@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { BsStarFill, BsStarHalf } from 'react-icons/bs';
+
 import { fetchCourseData } from '../services/api';
 import { Card, Typography } from "@material-tailwind/react";
-import {CourseDetail} from "../components/Course/CourseDetail"
+
 
 export function Profile() {
     const [userData, setUserData] = useState(null);
