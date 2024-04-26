@@ -8,16 +8,13 @@ import {
   Typography,
   Chip,
 } from "@material-tailwind/react";
-import { useUser } from "../context/userProvider";
-
 import Loader from "/src/components/Loader";
-
 export function Profile() {
+  const [userData, setUserData] = useState(null);
   const [courseData, setCourseData] = useState(null);
-  const [selectedCourse, setSelectedCourse] = useState(null); // Estado para almacenar el curso seleccionado
-  const { user } = useUser();
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const userData = user;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,17 +31,23 @@ export function Profile() {
       }
     };
 
-    fetchData();
-  }, []);
-  if (!userData) {
-    return <div>Cargando...</div>;
-  }
+    const storedUserData = localStorage.getItem("user");
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    }
 
+    // Llamar a fetchData después de haber establecido los datos del usuario
+    if (storedUserData) {
+      fetchData();
+    }
+  }, []);
   // Función para manejar el clic en el enlace del curso y actualizar el estado del curso seleccionado
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
   };
-
+  if (!userData) {
+    return <div>Cargando...</div>;
+  }
   return (
     <div className="flex flex-col lg:flex-row p-8 m-auto gap-8 justify-center ">
       {/* Caja del Perfil */}
@@ -52,7 +55,7 @@ export function Profile() {
         {/* Encabezado */}
         <div className=" rounded-md w-full px-4 py-4 text-center">
           <h1 className="text-2xl mb-6 font-semibold">
-            {userData?.role.toUpperCase()}
+            {userData?.role === "tutor" ? "TUTOR" : "ESTUDIANTE"}
           </h1>
           <hr></hr>
         </div>
@@ -83,7 +86,7 @@ export function Profile() {
                 <p variant="h6" color="blue-gray" className="mb-2 inline-block">
                   Educación: {userData?.educational_level}
                 </p>
-                <hr />  
+                <hr />
                 {userData?.role === "tutor" ? (
                   <>
                     <p className="mb-2 ">Especialidades:</p>
@@ -91,14 +94,20 @@ export function Profile() {
                       {userData.specialties &&
                       userData.specialties.length > 0 ? (
                         userData.specialties.map((specialtie, index) => (
-                          <Chip key={index} value={specialtie} className="mb-3 bg-gradient-to-br from-primary to-secondary"></Chip>
+                          <Chip
+                            key={index}
+                            value={specialtie}
+                            className="mb-3 bg-gradient-to-br from-primary to-secondary"
+                          ></Chip>
                         ))
                       ) : (
                         <p>No hay especialidades disponibles.</p>
                       )}
                     </div>
                     <hr />
-                    <p className="mt-2 inline-block">Biografía: {userData?.biography}</p>
+                    <p className="mt-2 inline-block">
+                      Biografía: {userData?.biography}
+                    </p>
                     <hr />
                   </>
                 ) : (
@@ -107,7 +116,11 @@ export function Profile() {
                     <div className="flex gap-2 flex-wrap">
                       {userData.interests && userData.interests.length > 0 ? (
                         userData.interests.map((interest, index) => (
-                          <Chip key={index} value={interest} className="mb-3 bg-gradient-to-br from-primary to-secondary"></Chip>
+                          <Chip
+                            key={index}
+                            value={interest}
+                            className="mb-3 bg-gradient-to-br from-primary to-secondary"
+                          ></Chip>
                         ))
                       ) : (
                         <li>No hay intereses disponibles.</li>
@@ -139,7 +152,7 @@ export function Profile() {
         {/* Encabezado */}
         <div className="rounded-md w-full px-4 py-4 text-center">
           <h1 className="text-2xl font-semibold mb-6">
-            {user.role === "tutor" ? "Cursos Creados" : "Cursos Inscriptos"}
+            {userData.role === "tutor" ? "Cursos Creados" : "Cursos Inscriptos"}
           </h1>
           <hr></hr>
         </div>
@@ -184,6 +197,44 @@ export function Profile() {
           )}
         </div>
       </Card>
+      {/* Contenido del Curso */}
+      <div className="flex flex-wrap lg:m-10 max-h-screen overflow-y-auto overflow-x-hidden">
+        {courseData && courseData.length > 0 ? (
+          courseData.map(
+            (course) =>
+              course.tutor_id === userData._id && (
+                <div
+                  key={course._id}
+                  className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2"
+                  onClick={() => handleCourseClick(course)}
+                >
+                  <Card>
+                    <img
+                      src={course.thumbnail}
+                      alt="card-image"
+                      className="object-cover w-full max-h-48 md:max-h-56 lg:max-h-64 xl:max-h-72" // Ajusta las alturas según tus necesidades
+                    />
+
+                    <Typography className="text-sm" variant="h3">
+                      {course.title}
+                    </Typography>
+                  </Card>
+                </div>
+              )
+          )
+        ) : (
+          <p>No hay cursos disponibles.</p>
+        )}
+      </div>
+
+      {/* Agrega un enlace para mostrar los detalles del curso solo si el rol es 'student'
+                 {userData.role === 'student' && (
+                                        <a href="#" className="text-sm font-semibold text-blue-500 hover:underline" onClick={() => handleCourseClick(course)}>Ver Detalles</a>
+                                    )} */}
+
+      {/* Detalle del curso seleccionado */}
+      {/* {selectedCourse && <CourseDetail courseInfo={selectedCourse} />} */}
+
       {/* Detalles del Curso */}
       {selectedCourse && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

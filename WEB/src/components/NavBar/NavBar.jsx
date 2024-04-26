@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import React from "react";
 import {
   Navbar,
@@ -55,14 +55,17 @@ export const NavBar = () => {
           <div className="flex items-center justify-between text-white">
             {/* div para centrar Master aula en version movil */}
             <div className="lg:hidden"></div>
+            <Link to="/">
+              
             <Typography
               variant="h2"
               as="a"
-              href="/"
+             
               className=" cursor-pointer  font-bold lg:mr-4 lg:py-1.5"
             >
               MasterAula
             </Typography>
+            </Link>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
 
@@ -136,10 +139,10 @@ export const NavBar = () => {
                 <div className="flex items-center gap-x-1">
                   <ButtonNavBar buttonText="Regístrate"
                     dialogContent={<LogInSignUp signInit={false} />}
-                    size="xl" />
+                    size="lg" />
                   <ButtonNavBar buttonText="Inicia Sesión"
                     dialogContent={<LogInSignUp signInit={true} />}
-                    size="xl" />
+                    size="lg" />
                 </div>
               </>)}
           </MobileNav>
