@@ -56,15 +56,15 @@ const teamData = [
   },
   {
     "id": "9",
-    "name": "Adrian Isaac ",
+    "name": "Adrian Isaac",
     "occupation": "Front-end",
-    "image": "https://picsum.photos/200/300?image=1027" 
+    "image": "fotoAdrian.png" 
   },
   {
     "id": "10",
     "name": "Josue Figueroa",
     "occupation": "Front-end",
-    "image": "https://picsum.photos/200/300?image=1027" 
+    "image": "fotoJosue.jpg" 
   },
 ];
 
