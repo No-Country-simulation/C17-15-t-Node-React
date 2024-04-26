@@ -3,8 +3,10 @@ import capFirstLetter from "../../utils/capFirstLetter";
 import { useUser } from "../../context/userProvider";
 import { ButtonNavBar } from "../NavBar/ButtonNavBar";
 import { LogInSignUp } from "../NavBar/LogInSignUp";
+import axios from "axios";
+import API_URL from "../../config/Config";
 /* eslint-disable react/prop-types */
-export const CourseDetail = ({ courseInfo }) => {
+export const CourseDetail = ({ courseInfo, cid }) => {
   const { user } = useUser();
   const userData = user;
 
@@ -25,6 +27,15 @@ export const CourseDetail = ({ courseInfo }) => {
       ratings,
     } = courseInfo;
 
+
+    const handleAgregar = async () => {
+      try {
+        const response = await axios.post(`${API_URL}/courses/addStudent/${cid}`, userData)
+        console.log(response)
+      } catch (error) {
+        console.error(error)
+      }
+    }
 
     return (
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden mt-10 mb-10 pt-5 pb-5 md:w-5/5 lg:w-3/4">
@@ -93,7 +104,7 @@ export const CourseDetail = ({ courseInfo }) => {
     
             {user ? (
               <div className="text-center">
-                <button
+                <button onClick={handleAgregar}
                   className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 mt-3 md:mt-5"
                   // onClick={handleInscribirmeClick} // Agrega un manejador de clics aquí
                 >
