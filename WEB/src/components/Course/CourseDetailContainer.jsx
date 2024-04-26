@@ -14,7 +14,6 @@ export const CourseDetailContainer = () => {
           `https://c17-15-t-node-react.onrender.com/api/courses/${cid}`
         );
         setCourseInfo(response.data.response);
-        console.log(response.data.response);
       } catch (error) {
         console.log(error);
       }
