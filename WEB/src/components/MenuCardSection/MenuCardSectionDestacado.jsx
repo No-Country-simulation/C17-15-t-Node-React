@@ -15,18 +15,14 @@ export default function MenuCardSectionDesarrollo() {
         );
         const limitedCourses = response.data.response.docs.slice(0, 6);
         limitedCourses.sort((a, b) => b.avg_rating - a.avg_rating);
-
-        console.log(limitedCourses);
         setCourses(limitedCourses);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     }
-
     fetchCourses();
   }, []);
-
 
   return (
     <>

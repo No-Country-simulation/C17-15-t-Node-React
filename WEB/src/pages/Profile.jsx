@@ -3,33 +3,42 @@ import { BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { fetchCourseData } from '../services/api';
 import { Card, Typography } from "@material-tailwind/react";
 import { useUser } from '../context/userProvider';
+import axios from 'axios';
+import API_URL from '../config/Config';
+import { useCallback } from 'react';
 
 export function Profile() {
 
     const [courseData, setCourseData] = useState(null);
-    const [selectedCourse, setSelectedCourse] = useState(null); // Estado para almacenar el curso seleccionado
+    const [selectedCourse, setSelectedCourse] = useState(null);
     const { user } = useUser();
-
     const userData = user;
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const courseData = await fetchCourseData();
-                console.log(courseData.response.docs);
-                setCourseData(courseData.response.docs);
-            } catch (error) {
-                // Manejar el error
-                console.error("Hubo un error al obtener la información del usuario:", error);
-            }
-        };
 
-        fetchData();
-    }, []);
+    console.log(document.cookie)
+    
+    const getCourseData = useCallback(async () => {
+        try {
+            if (user.role === "tutor") {
+                const response = await axios.get(`${API_URL}/courses/readByTutor`, {
+                    withCredentials: true
+                })
+                console.log(response)
+                setCourseData(response)
+            }   else if (user.role === "student") {
+                console.log("hola mundo")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }, [user]);
+
+    useEffect(() => {
+        getCourseData()
+    }, [user]);
+
     if (!userData) {
         return <div>Cargando...</div>;
     }
-
-    // Función para manejar el clic en el enlace del curso y actualizar el estado del curso seleccionado
     const handleCourseClick = (course) => {
         setSelectedCourse(course);
     };
