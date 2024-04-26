@@ -21,5 +21,5 @@ export const CourseDetailContainer = () => {
     getCouseInfo();
   }, [cid]);
 
-  return <CourseDetail courseInfo={courseInfo} />;
+  return <CourseDetail courseInfo={courseInfo} cid={cid}/>;
 };
