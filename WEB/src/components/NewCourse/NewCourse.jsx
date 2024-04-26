@@ -5,6 +5,7 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import axios from "axios";
 
 import { useState } from "react";
 
@@ -54,11 +55,13 @@ export const NewCourse = () => {
     };
   
     try {
-      const respuesta = await fetch(
+      const token = localStorage.getItem("token")
+      const respuesta = await axios.post(
         "https://c17-15-t-node-react.onrender.com/api/courses",
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Autorization": ` Bearer ${token}`
+          },
           body: JSON.stringify(cuerpoPeticion),
         }
       );
@@ -84,7 +87,7 @@ export const NewCourse = () => {
 
  
   return (
-    <div className="w-[90%] bg-blue-gray-50 my-10 rounded-md">
+    <div className="w-[90%] bg-blue-gray-50">
       <div>
         <Card color="transparent" shadow={false} className="p-8">
           <Typography
@@ -94,12 +97,9 @@ export const NewCourse = () => {
           >
             Nuevo Curso
           </Typography>
-          <Typography color="gray" className="mt-1 font-normal">
-            Ingresa los datos
-          </Typography>
           <form
             onSubmit={enviarFormulario}
-            className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+            className="mt-2 mb-2 max-w-screen-lg sm:w-96"
           >
             <div className="mb-1 flex flex-col gap-6">
               <Typography variant="h6" color="blue-gray" className="-mb-3">
