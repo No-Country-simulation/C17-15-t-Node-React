@@ -1,5 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import { OurTeam } from "./OurTeam";
+import { NewCourse } from "../NewCourse/NewCourse";
 
 export const AboutComponent = () => {
   return (

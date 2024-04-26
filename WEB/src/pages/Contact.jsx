@@ -8,10 +8,14 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-
+import { motion } from "framer-motion";
 export default function Contact() {
   return (
-    <main className="contact-main">
+    <motion.main
+    initial={{opacity:0}}
+    animate={{opacity: 1}}
+      className="contact-main"
+    >
       <div className="flex-contact ">
         <div className="content">
           <div className="title mb-8">
@@ -79,7 +83,7 @@ export default function Contact() {
                     }}
                   />
                   {/*asunto*/}
-                  <Textarea label="Message" />
+                  <Textarea label="Mensaje" />
                   {/*pais*/}
                   <div className="w-72">
                     <Select label="Elige tu pais">
@@ -109,12 +113,12 @@ export default function Contact() {
           </div>
         </div>
         <div className="logo">
-          <img src="public\LogoMasterAula.png" alt="" />
+          <img src="/LogoMasterAula.png" alt="" />
           <h1 className="mt-2 text-blue-gray-900 font-semibold leading-tight">
             Mas que cursos, una experiencia de aprendizaje
           </h1>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }

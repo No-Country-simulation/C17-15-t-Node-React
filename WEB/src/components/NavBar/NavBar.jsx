@@ -8,8 +8,10 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { ButtonNavBar } from "./ButtonNavBar";
-import { RegistrateNavBar } from "./RegistrateNavBar";
-import { LogInNavBar} from "./LogInNavBar";
+import { LogInSignUp } from "./LogInSignUp";
+import { SignProvider } from "../../context/signProvider";
+import { useUser } from "../../context/userProvider";
+import { ProfileMenu } from "../ProfileMenu";
 
 export const NavBar = () => {
   const links = [
@@ -21,6 +23,8 @@ export const NavBar = () => {
 
   ];
 
+  const { user, logout } = useUser();
+  const userData = user;
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -45,40 +49,46 @@ export const NavBar = () => {
   );
 
   return (
-    <>
+    <SignProvider>
       <div className="">
         <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-gradient-to-br from-primary to-secondary">
           <div className="flex items-center justify-between text-white">
-          {/* div para centrar Master aula en version movil */}
-            <div className="lg:hidden"></div> 
+            {/* div para centrar Master aula en version movil */}
+            <div className="lg:hidden"></div>
             <Typography
               variant="h2"
               as="a"
               href="/"
-              className=" cursor-pointer  font-bold lg:mr-4 lg:py-1.5" 
+              className=" cursor-pointer  font-bold lg:mr-4 lg:py-1.5"
             >
               MasterAula
             </Typography>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
-              {/* pantalla tamaño hasta lg */}
-              <div className="items-center gap-x-4 hidden lg:flex 2xl:hidden">
-                <ButtonNavBar buttonText="Regístrate"
-                  dialogContent={<RegistrateNavBar />}
-                  size="md" />
-                <ButtonNavBar buttonText="Inicia Sesión"
-                  dialogContent={<LogInNavBar />}
-                  size="md" />
+
+              {user ? (<>
+                <div className="items-center gap-x-4 hidden lg:flex ">
+              <ProfileMenu userData={userData} />
               </div>
-               {/* pantalla tamaño despues de 2xl */}
-               <div className="items-center gap-x-4 hidden 2xl:flex">
-                <ButtonNavBar buttonText="Regístrate"
-                  dialogContent={<RegistrateNavBar />}
-                  size="lg" />
-                <ButtonNavBar buttonText="Inicia Sesión"
-                  dialogContent={<LogInNavBar />}
-                  size="lg" />
-              </div>
+              </>) : (<>
+                <div className="items-center gap-x-4 hidden lg:flex 2xl:hidden">
+                  <ButtonNavBar buttonText="Regístrate"
+                    dialogContent={<LogInSignUp signInit={false} />}
+                    size="md" />
+                  <ButtonNavBar buttonText="Inicia Sesión"
+                    dialogContent={<LogInSignUp signInit={true} />}
+                    size="md" />
+                </div>
+
+                <div className="items-center gap-x-4 hidden 2xl:flex">
+                  <ButtonNavBar buttonText="Regístrate"
+                    dialogContent={<LogInSignUp signInit={false} />}
+                    size="lg" />
+                  <ButtonNavBar buttonText="Inicia Sesión"
+                    dialogContent={<LogInSignUp signInit={true} />}
+                    size="lg" />
+                </div>
+              </>)}
               <IconButton
                 variant="text"
                 className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -118,21 +128,25 @@ export const NavBar = () => {
               </IconButton>
             </div>
           </div>
-          <MobileNav open={openNav}>
+          <MobileNav open={openNav} className="text-center">
             {navList}
-            <div className="flex items-center gap-x-1">
-              <Button fullWidth variant="text" size="sm" className="">
-                <span>Inicia Sesión</span>
-              </Button>
-              <Button fullWidth variant="gradient" size="sm" className="">
-                <span>Registrate</span>
-              </Button>
-            </div>
+            {user ? (
+              <ProfileMenu userData={userData} />              
+              ) : (<>
+                <div className="flex items-center gap-x-1">
+                  <ButtonNavBar buttonText="Regístrate"
+                    dialogContent={<LogInSignUp signInit={false} />}
+                    size="xl" />
+                  <ButtonNavBar buttonText="Inicia Sesión"
+                    dialogContent={<LogInSignUp signInit={true} />}
+                    size="xl" />
+                </div>
+              </>)}
           </MobileNav>
         </Navbar>
       </div>
 
 
-    </>
+    </SignProvider>
   );
 };
