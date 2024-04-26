@@ -136,10 +136,10 @@ export const NavBar = () => {
                 <div className="flex items-center gap-x-1">
                   <ButtonNavBar buttonText="Regístrate"
                     dialogContent={<LogInSignUp signInit={false} />}
-                    size="xl" />
+                    size="lg" />
                   <ButtonNavBar buttonText="Inicia Sesión"
                     dialogContent={<LogInSignUp signInit={true} />}
-                    size="xl" />
+                    size="lg" />
                 </div>
               </>)}
           </MobileNav>

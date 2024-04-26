@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { fetchCourseData } from '../services/api';
 import { Card, Typography } from "@material-tailwind/react";
-import { useUser } from '../context/userProvider';
+import {CourseDetail} from "../components/courseDetail/CourseDetail"
 
 export function Profile() {
-
+    const [userData, setUserData] = useState(null);
     const [courseData, setCourseData] = useState(null);
-    const [selectedCourse, setSelectedCourse] = useState(null); // Estado para almacenar el curso seleccionado
-    const { user } = useUser();
+    const [selectedCourse, setSelectedCourse] = useState(null);
 
-    const userData = user;
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -23,16 +22,24 @@ export function Profile() {
             }
         };
 
-        fetchData();
-    }, []);
-    if (!userData) {
-        return <div>Cargando...</div>;
-    }
+        const storedUserData = localStorage.getItem('user');
+        if (storedUserData) {
+            setUserData(JSON.parse(storedUserData));
+        }
 
-    // Función para manejar el clic en el enlace del curso y actualizar el estado del curso seleccionado
+        // Llamar a fetchData después de haber establecido los datos del usuario
+        if (storedUserData) {
+            fetchData();
+        }
+    }, []);
+
     const handleCourseClick = (course) => {
         setSelectedCourse(course);
     };
+    if (!userData) {
+        return <div>Cargando...</div>;
+    }
+    
 
     return (
         <div className="flex flex-col lg:flex-row p-8 m-auto gap-8 justify-center ">
@@ -40,7 +47,7 @@ export function Profile() {
             <div className="w-full lg:w-1/2 p-2 flex flex-col items-center border-2 rounded-md border-secondary">
                 {/* Encabezado */}
                 <div className="bg-primary rounded-md text-white px-4 py-6">
-                    <h1 className="text-2xl  font-semibold">{userData?.role.toUpperCase()}</h1>
+                    <h1 className="text-2xl  font-semibold"> {userData?.role === 'tutor' ? "TUTOR" : "ESTUDIANTE"}</h1>
                 </div>
                 {/* Contenido del perfil */}
                 <div className="p-2">
@@ -96,23 +103,25 @@ export function Profile() {
                             <p>Ciudad: {userData?.city}</p>
                             <p>Pais: {userData?.country}</p>
 
+
                         </div>
                     </div>
                 </div>
             </div>
+            
             {/* Caja de Cursos */}
             <div className="w-full lg:w-1/2 p-2 flex flex-col items-center border-2 rounded-md border-secondary">
                 {/* Encabezado */}
                 <div className="bg-primary rounded-md text-white px-4 py-6">
                     <h1 className="text-2xl font-semibold">
-                        {user.role === 'tutor' ? 'Cursos Creados' : 'Cursos Inscriptos'}
+                        {userData.role === 'tutor' ? 'Cursos Creados' : 'Cursos Inscriptos'}
                     </h1>
                 </div>
                 {/* Contenido del Curso */}
                 <div className="flex flex-wrap lg:m-10 max-h-screen overflow-y-auto overflow-x-hidden">
                     {courseData && courseData.length > 0 ? (
                         courseData.map((course) => (
-                            <div key={course._id} className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2">
+                            <div key={course._id} className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-2" onClick={() => handleCourseClick(course)}>
                                 <Card>
                                     <img
                                         src={course.thumbnail}
@@ -132,6 +141,8 @@ export function Profile() {
                     )}
 
                 </div>
+                {/* Detalle del curso seleccionado */}
+            {selectedCourse && <CourseDetail courseInfo={selectedCourse} />}
 
             </div>
             {/* Detalles del Curso */}
