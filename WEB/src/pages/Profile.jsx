@@ -6,8 +6,12 @@ import { useUser } from "../context/userProvider";
 import { ButtonNewCourse } from "../components/NewCourse/ButtonNewCourse";
 
 export function Profile() {
-  const [courseData, setCourseData] = useState(null);
-  const { user } = useUser();
+//   const [courseData, setCourseData] = useState(null);
+//   const { user } = useUser();
+
+    const [courseData, setCourseData] = useState(null);
+    const [selectedCourse, setSelectedCourse] = useState(null); // Estado para almacenar el curso seleccionado
+    const { user } = useUser();
 
   const userData = user;
   useEffect(() => {
@@ -24,12 +28,34 @@ export function Profile() {
         );
       }
     };
+    const userData = user;
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const courseData = await fetchCourseData();
+                console.log(courseData.response.docs);
+                setCourseData(courseData.response.docs);
+            } catch (error) {
+                // Manejar el error
+                console.error("Hubo un error al obtener la información del usuario:", error);
+            }
+        };
 
     fetchData();
   }, []);
   if (!userData) {
     return <div>Cargando...</div>;
   }
+        fetchData();
+    }, []);
+    if (!userData) {
+        return <div>Cargando...</div>;
+    }
+
+    // Función para manejar el clic en el enlace del curso y actualizar el estado del curso seleccionado
+    const handleCourseClick = (course) => {
+        setSelectedCourse(course);
+    };
 
   return (
     <div className="flex flex-col lg:flex-row p-8 m-auto gap-8 justify-center ">
