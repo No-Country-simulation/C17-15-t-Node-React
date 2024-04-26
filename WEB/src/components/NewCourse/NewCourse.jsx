@@ -55,18 +55,18 @@ export const NewCourse = () => {
     };
   
     try {
-      const token = localStorage.getItem("token")
-      const respuesta = await axios.post(
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
         "https://c17-15-t-node-react.onrender.com/api/courses",
+        cuerpoPeticion, 
         {
           headers: {
-            "Autorization": ` Bearer ${token}`
-          },
-          body: JSON.stringify(cuerpoPeticion),
+            "Authorization": `Bearer ${token}`
+          }
         }
       );
-  
-      if (respuesta.ok) {
+      console.log(response);
+      if (response.status === 201) {
         console.log("¡Curso creado exitosamente!");
         setDatosCurso({
           nombre: "",
@@ -78,7 +78,7 @@ export const NewCourse = () => {
           nivelesSeleccionados: [],
         });
       } else {
-        console.error("Error al crear el curso:", respuesta.status);
+        console.error("Error al crear el curso:", response.status);
       }
     } catch (error) {
       console.error("Error de red:", error);
