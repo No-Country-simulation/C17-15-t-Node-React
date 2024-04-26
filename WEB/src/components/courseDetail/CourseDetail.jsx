@@ -1,5 +1,5 @@
 import { Spinner, Typography } from "@material-tailwind/react";
-
+import capFirstLetter from "../../utils/capFirstLetter";
 /* eslint-disable react/prop-types */
 export const CourseDetail = ({ courseInfo }) => {
   if (!courseInfo) {
@@ -9,6 +9,9 @@ export const CourseDetail = ({ courseInfo }) => {
   } else {
     const { title, tutor_id, description, price, level, thumbnail, duration, enrolled_students } =
       courseInfo;
+
+    console.log(courseInfo);
+
     return (
 
 
@@ -39,10 +42,10 @@ export const CourseDetail = ({ courseInfo }) => {
               {tutor_id && (
                 <span className="text-gray-900">
                   {tutor_id.name} {tutor_id.lastName}
-                 
+
                 </span>
               )}
-              
+
             </div>
 
             <div className="mb-2">
@@ -55,6 +58,26 @@ export const CourseDetail = ({ courseInfo }) => {
               </span>
               <span className="text-gray-900">{duration} semanas</span>
             </div>
+
+
+            {courseInfo.enrolled_students && courseInfo.enrolled_students.length > 0 && (
+              <div>
+                <div className="mb-2">
+                  <span className="text-black-600 mr-2 font-semibold">
+                    Estudiantes:
+                  </span>
+
+                </div>
+                <ul>
+                  {courseInfo.enrolled_students.map(student => (
+                    <li key={student._id}>
+                      {capFirstLetter(student.name)} {capFirstLetter(student.lastName)}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+            }
             <div className="text-center">
               <button className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 mt-3 md:mt-5">
                 INSCRIBIRME
