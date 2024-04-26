@@ -9,7 +9,7 @@ import { Footer } from "./components/Footer/Footer";
 import { Courses } from "./pages/Courses";
 import { Profile } from "./pages/Profile";
 import { AnimatePresence } from "framer-motion";
-import { CourseDetailContainer } from "./components/courseDetail/CourseDetailContainer";
+import { CourseDetailContainer } from "./components/Course/CourseDetailContainer";
 import { UserProvider } from "./context/userProvider";
 
 
