@@ -30,9 +30,6 @@ En nuestro sistema, destacamos la presencia de dos tipos de usuarios principales
 Se dispone de un chat para facilitar la comunicación entre alumno y tutor. Así, el alumno puede consultar si el tutor conoce sobre un determinado tema y también pueden por ejemplo acordar el medio de pago.
 
 El sistema brinda un ranking para premiar a los tutores que hayan sido mejor calificado por sus alumnos. Así, cuando una persona busque cursos o tutores, quienes tengan mejores feedbacks, serán quienes ganarán una mayor visualización de sus perfiles.
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 
 ## Tecnologías utilizadas
