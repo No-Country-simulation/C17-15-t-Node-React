@@ -38,7 +38,9 @@ El sistema brinda un ranking para premiar a los tutores que hayan sido mejor cal
 - Framework: React js
 - Base de datos: MongoDB
 - Frontend: Tailwindcss y Material Tailwind
+- Backend: Node Js
 - Sistema de gestión de versiones: Git
+- Gestion de Proyecto: Jira - Miro
 
 ## Beneficios
 
@@ -56,7 +58,7 @@ encontramos:
 - Sistema de puntos: Con el objetivo de premiar a los alumnos quienes reciben buenas puntuaciones de tutores, ofrecerles descuentos o promociones en la adquisición de cursos.
 
 
-## Authors
+## Autores
 
 Nuestro equipo de Cohorte 17 – 15 - T está conformado por todas las siguientes personas:
 - Adrian Issac (Frontend) https://www.linkedin.com/in/adrian-issac-2819492b5/
@@ -71,7 +73,7 @@ Nuestro equipo de Cohorte 17 – 15 - T está conformado por todas las siguiente
 
 ## 🔗 Enlaces y referencias
 
-- Gitbuh: https://github.com/No-Country/C17-15-t-Node-React 
+- Github: https://github.com/No-Country/C17-15-t-Node-React 
 - Jira (Backend): https://facutota.atlassian.net/jira/software/projects/NODE/boards/1
 - Jira (Frontend): https://medinafacundom.atlassian.net/jira/software/projects/REACT/boards/1?assignee=unassigned 
 - Miro (Historias de usuario): https://miro.com/app/board/uXjVKa_Zq94=/
